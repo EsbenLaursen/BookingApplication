@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingApplication", "BookingApplication\BookingApplication.csproj", "{27E51573-9F9E-4E5F-B7A9-C6C3D426E4E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingApp", "BookingApp\BookingApp.csproj", "{CFD90854-9AB4-4271-A493-86CF1E401CFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{27E51573-9F9E-4E5F-B7A9-C6C3D426E4E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27E51573-9F9E-4E5F-B7A9-C6C3D426E4E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27E51573-9F9E-4E5F-B7A9-C6C3D426E4E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27E51573-9F9E-4E5F-B7A9-C6C3D426E4E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFD90854-9AB4-4271-A493-86CF1E401CFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFD90854-9AB4-4271-A493-86CF1E401CFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFD90854-9AB4-4271-A493-86CF1E401CFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFD90854-9AB4-4271-A493-86CF1E401CFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
