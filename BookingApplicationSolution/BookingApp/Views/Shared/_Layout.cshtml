@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Drawing
+@using System.Web.UI.WebControls
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -17,13 +19,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Sandvedhus Bed&Breakfast", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Booking", "Booking", "Home")</li>
+                    <li>@Html.ActionLink("Gallery", "Gallery", "Home")</li>
+                    <li>@Html.ActionLink("Price list", "Price", "Home")</li>
+                    <li>@Html.ActionLink("About", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Reviews", "Review", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

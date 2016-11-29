@@ -26,5 +26,25 @@ namespace BookingApp.Controllers
 
             return View();
         }
+
+        public ActionResult Review()
+        {
+            return View();
+        }
+
+        public ActionResult Price()
+        {
+            return View();
+        }
+
+        public ActionResult Gallery()
+        {
+            return View();
+        }
+
+        public ActionResult Booking()
+        {
+            return View();
+        }
     }
 }
