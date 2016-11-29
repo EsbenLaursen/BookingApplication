@@ -5,7 +5,8 @@ using System.Web;
 
 namespace BookingApp
 {
-    public class Booking
+    [Serializable]
+    public class Booking 
     {
         public int Id { get; set; }
         public DateTime StartDate { get; set; }

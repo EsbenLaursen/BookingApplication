@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookingApp.Gateways;
+using BookingApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,16 +10,22 @@ namespace BookingApp.Controllers
 {
     public class HomeController : Controller
     {
+        IServiceGateway<Booking> bg = new DllFacade().GetBookingGateway();
         public ActionResult Index()
         {
+            
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+           
+            HomeBookingViewModel viewModel = new HomeBookingViewModel() {
+                boo = bg.Read(5) 
+            };
+            
 
-            return View();
+            return View(viewModel);
         }
 
         public ActionResult Contact()
