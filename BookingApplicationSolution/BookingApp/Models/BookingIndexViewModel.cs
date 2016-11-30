@@ -6,9 +6,8 @@ using System.Web;
 
 namespace BookingApp.Models
 {
-    public class HomeBookingViewModel
+    public class BookingIndexViewModel
     {
         public List<Booking> Bookings { get; set; }
-        public Booking boo { get; set; }
     }
 }

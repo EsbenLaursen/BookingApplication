@@ -19,13 +19,7 @@ namespace BookingApp.Controllers
 
         public ActionResult About()
         {
-        
-            HomeBookingViewModel viewModel = new HomeBookingViewModel() {
-                boo = bg.Read(3) 
-            };
-            
-
-            return View(viewModel);
+             return View();
         }
 
         public ActionResult Contact()

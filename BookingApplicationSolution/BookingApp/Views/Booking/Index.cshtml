@@ -1,7 +1,27 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿@model BookingApp.Models.BookingIndexViewModel
 
-<h2>Index</h2>
-
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover, grayHover">
+                
+                <thead>
+                   
+                </thead>
+                <tbody>
+                    @foreach (var b in Model.Bookings)
+                    {
+                        <tr>
+                             <td>@b.Customer.LastName</td>
+                            <td>@b.Customer.FirstName</td>
+                            <td>@b.Customer.Telephone</td>
+                            <td>@b.StartDate</td>
+                            <td>@b.EndDate</td>
+                            <td></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
