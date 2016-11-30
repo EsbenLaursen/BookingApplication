@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BookingApp.Entities
 {
-    [Serializable]
+    
     public class FootCare
     {
         public int Id { get; set; }

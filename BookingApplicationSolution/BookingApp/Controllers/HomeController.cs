@@ -21,7 +21,7 @@ namespace BookingApp.Controllers
         {
            
             HomeBookingViewModel viewModel = new HomeBookingViewModel() {
-                boo = bg.Read(5) 
+                boo = bg.Read(3) 
             };
             
 

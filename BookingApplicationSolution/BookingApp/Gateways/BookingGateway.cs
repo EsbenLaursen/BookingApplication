@@ -76,7 +76,8 @@ namespace BookingApp.Gateways
                 var response = client.GetAsync("/api/bookings/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    return JsonConvert.DeserializeObject<Booking>(response.Content.ReadAsStringAsync().Result);
+                    // return JsonConvert.DeserializeObject<Booking>(response.Content.ReadAsStringAsync().Result);
+                    return response.Content.ReadAsAsync<Booking>().Result;
                 }
             }
             return null;
