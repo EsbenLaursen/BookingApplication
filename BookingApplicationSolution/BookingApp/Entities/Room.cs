@@ -2,7 +2,7 @@
 
 namespace BookingApp
 {
-    [Serializable]
+   
     public class Room
     {
         

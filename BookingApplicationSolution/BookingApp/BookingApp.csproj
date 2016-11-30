@@ -173,6 +173,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="DllFacade.cs" />
     <Compile Include="Entities\Booking.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -275,6 +276,8 @@
     <Content Include="Views\Home\Price.cshtml" />
     <Content Include="Views\Home\Gallery.cshtml" />
     <Content Include="Views\Home\Booking.cshtml" />
+    <Content Include="Views\Booking\BookingCheckout.cshtml" />
+    <Content Include="Views\Booking\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
