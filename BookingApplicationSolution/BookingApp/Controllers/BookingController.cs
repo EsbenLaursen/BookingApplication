@@ -1,4 +1,5 @@
-﻿using BookingApp.Gateways;
+﻿using BookingApp.Entities;
+using BookingApp.Gateways;
 using BookingApp.Models;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,15 @@ namespace BookingApp.Controllers
         public ActionResult BookingCheckout()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult BookingCheckout(Customer c)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("BookingCheckout");
+            }
+            return View(c);
         }
     }
 }

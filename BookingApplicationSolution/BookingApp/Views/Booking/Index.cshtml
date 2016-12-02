@@ -1,27 +1,14 @@
-﻿@model BookingApp.Models.BookingIndexViewModel
+﻿<html>
+<body>
+    
+    <form style="padding-top: 5%">
+        Choose a date:
+<br />
+        From:
+        <input type="date" name="from" min="@DateTime.Now.ToString("yyyy-MM-dd")"> 
+        To:
+        <input type="date" name="to" min="@DateTime.Now.ToString("yyyy-MM-dd")"> 
+    </form>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <table class="table table-hover, grayHover">
-                
-                <thead>
-                   
-                </thead>
-                <tbody>
-                    @foreach (var b in Model.Bookings)
-                    {
-                        <tr>
-                             <td>@b.Customer.LastName</td>
-                            <td>@b.Customer.FirstName</td>
-                            <td>@b.Customer.Telephone</td>
-                            <td>@b.StartDate</td>
-                            <td>@b.EndDate</td>
-                            <td></td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+</body>
+</html>
