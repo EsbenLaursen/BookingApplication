@@ -94,18 +94,6 @@
 
 <script>
 
-
-    @*var data = @Html.Raw(Json.Encode(Model.Bookings));
-
-    for(var key in data)
-    {
-        if (data.hasOwnProperty(key)) {
-            console.log(key + " -> " + data[key]);
-            console.log(convertDate(data[key]['EndDate']));
-
-        }
-    }*@
-
     function convertDate(unformattedDate) {
         var dateString = unformattedDate.substr(6);
         var currentTime = new Date(parseInt(dateString ));
@@ -116,26 +104,23 @@
         return date;
     };
 
-
-
     $(document).ready(function () {
-        $(".datepickerInput").datepicker({
-            dateFormat: "dd-mm-yy",
-            monthNames: ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December"],
-            showOtherMonths: true,
-            showWeek: "W",
-            weekHeader: "#",
-            minDate: 0,
-        });
 
+            $(".datepickerInput").datepicker({
+                dateFormat: "dd-mm-yy",
+                monthNames: ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December"],
+                showOtherMonths: true,
+                showWeek: "W",
+                weekHeader: "#",
+                minDate: 0,
+            });
 
-
-
-        $("#refreshBtn").click(function () {
+            $("#refreshBtn").click(function () {
 
             var dateArray = [];
 
             var data = @Html.Raw(Json.Encode(Model.Bookings));
+
             for(var key in data)
             {
                 if (data.hasOwnProperty(key)) {
@@ -154,9 +139,8 @@
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                         return [dateArray.indexOf(string) == -1]
                     }
+                });
             });
-            console.log(dateArray);
-        });
     });
 </script>
 

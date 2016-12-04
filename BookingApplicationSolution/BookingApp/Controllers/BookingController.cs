@@ -33,6 +33,10 @@ namespace BookingApp.Controllers
             {
                 Bookings = bg.Read()
             };
+            CheckRoomAvailability check = new CheckRoomAvailability();
+            List<DateTime> dates = check.Check(DateTime.Now, DateTime.Now.AddDays(10));
+
+
             return View(viewModel);
         }
         [HttpPost]
