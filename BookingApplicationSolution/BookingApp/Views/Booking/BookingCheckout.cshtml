@@ -1,74 +1,186 @@
-﻿@model BookingApp.Entities.Customer
+﻿@model BookingApp.Models.BookingIndexViewModel
+@using Newtonsoft.Json
 @{
     ViewBag.Title = "BookingCheckout";
 }
 
 <h2>Booking Checkout</h2>
 
- @*<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>*@
-
-@using (Html.BeginForm("BookingCheckout", "Booking"))
-{
-
-    @Html.EditorFor(model => model.FirstName)
-    @Html.ValidationMessageFor(model => model.FirstName)
-
-    <input type="submit" value="conf" class="btn btn-success" />
-}
 
 
+@*<div class="container">
+    @using (Html.BeginForm("BookingCheckout", "Booking"))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-sm-5">
+                @Html.Label("Første navn")
+                @Html.EditorFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-6"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                @Html.Label("Sidste navn")
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-6"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                @Html.Label("Mobilnummer")
+                @Html.EditorFor(model => model.Telephone)
+                @Html.ValidationMessageFor(model => model.Telephone)
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-6"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                @Html.Label("Email")
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="row" style="padding-top: 2.5%">
-        <div class="col-sm-5">
-        <label for="FirstName" style="width: 85px">First name:</label>
-          @Html.EditorFor(model => model.FirstName)
-          @Html.ValidationMessageFor(model => model.FirstName,"",new {@class = "text-danger" })
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-6"></div>
         </div>
 
-        <div class="col-sm-1"></div>
-        <div class="col-sm-6"></div>
-    </div>
-    <div class="row" style="padding-top: 2.5%">
+        <input type="submit" value="Confirm" class="btn btn-success" />
+
+
+
+        }
+
+        <br />
+        <br />
+*@
+        
+<form>
+    @foreach (var b in Model.Bookings)
+    {
+        <p>@b.StartDate</p>
+        
+        <p>@b.EndDate</p>
+    }
+</form>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Bjørn Eksperiment Zone.</div>
+            <div class="panel-body">
+                <div class="row">
+                    <p class="col-md-2 col-sm-6 col-xs-12">Start Dato:</p>
+                    <input type="text" id="datepicker" class="datepickerInput col-xs-12 col-sm-6 col-md-10">
+                </div>
+                <div class="row">
+                    <p class="col-md-2 col-sm-6 col-xs-12">Slut Dato:</p>
+                    <input type="text" id="datepicker2" class="datepickerInput col-xs-12 col-sm-6 col-md-10">
+                </div>
+
+                <br />
+                <br />
+                <a class="btn btn-default" id="refreshBtn"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                <input id="datepicker3" type="text"/>
+            </div>
+        </div>
+
+
+
+
+<script>
+
+
+    @*var data = @Html.Raw(Json.Encode(Model.Bookings));
+
+    for(var key in data)
+    {
+        if (data.hasOwnProperty(key)) {
+            console.log(key + " -> " + data[key]);
+            console.log(convertDate(data[key]['EndDate']));
+
+        }
+    }*@
+
+    function convertDate(unformattedDate) {
+        var dateString = unformattedDate.substr(6);
+        var currentTime = new Date(parseInt(dateString ));
+        var month = currentTime.getMonth() + 1;
+        var day = currentTime.getDate();
+        var year = currentTime.getFullYear();
+        var date = year + "/" + month + "/" + day;
+        return date;
+    };
+
+
+
+    $(document).ready(function () {
+        $(".datepickerInput").datepicker({
+            dateFormat: "dd-mm-yy",
+            monthNames: ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December"],
+            showOtherMonths: true,
+            showWeek: "W",
+            weekHeader: "#",
+            minDate: 0,
+        });
+
+
+
+
+        $("#refreshBtn").click(function () {
+
+            var dateArray = [];
+
+            var data = @Html.Raw(Json.Encode(Model.Bookings));
+            for(var key in data)
+            {
+                if (data.hasOwnProperty(key)) {
+
+                    var newEndDate = convertDate(data[key]['EndDate']);
+                    var newStartDate = convertDate(data[key]['StartDate']);
+                    for (var d = new Date(newStartDate) ; d <= new Date(newEndDate) ; d.setDate(d.getDate() + 1)) {
+                        dateArray.push($.datepicker.formatDate('yy-mm-dd', d));
+                    }
+                }
+            }
+
+            $('#datepicker3').datepicker({
+                beforeShowDay:
+                    function (date) {
+                        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                        return [dateArray.indexOf(string) == -1]
+                    }
+            });
+            console.log(dateArray);
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="row" style="padding-top: 2.5%">
         <div class="col-sm-5">
         <label for="LastName" style="width: 85px">Last name:</label>
         <input name="LastName" type="text" value="" id="LastName">
         </div>
         <div class="col-sm-1"></div>
         <div class="col-sm-6"></div>
-    </div>
-    <div class="row" style="padding-top: 2.5%">
-        <div class="col-sm-5"><label for="Email" style="width: 85px">Email:</label><input name="Email" type="text" value="" id="Email"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-6"></div>
-    </div>
-    <div class="row" style="padding-top: 2.5%">
-        <div class="col-sm-5"><label for="Telephone" style="width: 85px">Phone:</label><input name="Telephone" type="text" value="" id="Telephone"></div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-6"></div>
-    </div>
-    <div class="row" style="padding-top: 2.5%">
-       
-        <div class="col-sm-2">
-             <input type="submit" value="confirm" class="btn btn-success"/>
-        </div>
-        <div class="col-sm-10"></div>
-    </div>
+    </div>*@
 
-</div>
 

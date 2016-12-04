@@ -14,6 +14,7 @@ namespace BookingApp.Controllers
     {
 
         IServiceGateway<Booking> bg = new DllFacade().GetBookingGateway();
+        IServiceGateway<Customer> cm = new DllFacade().GetCustomerGateway();
         // GET: Booking
         public ActionResult Index()
         {
@@ -28,7 +29,11 @@ namespace BookingApp.Controllers
         
         public ActionResult BookingCheckout()
         {
-            return View();
+            BookingIndexViewModel viewModel = new BookingIndexViewModel()
+            {
+                Bookings = bg.Read()
+            };
+            return View(viewModel);
         }
         [HttpPost]
         public ActionResult BookingCheckout(Customer c)
