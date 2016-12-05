@@ -11,6 +11,7 @@ namespace BookingApp.Controllers
 {
     public class HomeController : Controller
     {
+        private IServiceGateway<FootCare> fc = new DllFacade().GetSFootCareGateway();
         IServiceGateway<Booking> bg = new DllFacade().GetBookingGateway();
         public ActionResult Index()
         {
@@ -37,7 +38,11 @@ namespace BookingApp.Controllers
 
         public ActionResult Price()
         {
-            return View();
+            PriceIndexViewModel viewmodel = new PriceIndexViewModel()
+            {
+                FootCares = fc.Read()
+            };
+            return View(viewmodel);
         }
 
         public ActionResult Gallery()
@@ -49,5 +54,7 @@ namespace BookingApp.Controllers
         {
             return View();
         }
+
+        
     }
 }
