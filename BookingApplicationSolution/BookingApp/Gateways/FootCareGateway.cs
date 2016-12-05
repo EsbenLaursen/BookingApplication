@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 
 namespace BookingApp.Gateways
@@ -20,8 +22,22 @@ namespace BookingApp.Gateways
 
         public List<FootCare> Read()
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.GetAsync("api/Footcares").Result;
+                if (response.IsSuccessStatusCode)
+                { //JsonConvert.DeserializeObject<List<Footcare>>(
+                    return response.Content.ReadAsAsync<List<FootCare>>().Result;
+                }
+            }
+            return new List<FootCare>();
         }
+
 
         public FootCare Read(int id)
         {

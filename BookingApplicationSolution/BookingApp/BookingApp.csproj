@@ -175,6 +175,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="CheckRoomAvailability.cs" />
     <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\PricesController.cs" />
     <Compile Include="DllFacade.cs" />
     <Compile Include="Entities\Booking.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Models\BookingIndexViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PriceIndexViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Room.cs" />
     <Compile Include="Startup.cs" />
@@ -278,9 +280,11 @@
     <Content Include="Views\Home\Booking.cshtml" />
     <Content Include="Views\Booking\BookingCheckout.cshtml" />
     <Content Include="Views\Booking\Index.cshtml" />
+    <Content Include="Views\Prices\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\FootCare\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

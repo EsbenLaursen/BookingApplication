@@ -3,13 +3,14 @@ using BookingApp.Gateways;
 using BookingApp.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace BookingApp.Controllers
 {
-    
+
     public class BookingController : Controller
     {
 
@@ -19,14 +20,15 @@ namespace BookingApp.Controllers
         public ActionResult Index()
         {
 
-            BookingIndexViewModel viewModel = new BookingIndexViewModel() {
+            BookingIndexViewModel viewModel = new BookingIndexViewModel()
+            {
                 Bookings = bg.Read()
             };
             return View(viewModel);
         }
 
         //Post: booking
-        
+
         public ActionResult BookingCheckout()
         {
             BookingIndexViewModel viewModel = new BookingIndexViewModel()
