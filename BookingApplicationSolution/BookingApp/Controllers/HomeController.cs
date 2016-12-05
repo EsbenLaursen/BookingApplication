@@ -1,4 +1,5 @@
-﻿using BookingApp.Gateways;
+﻿using BookingApp.Entities;
+using BookingApp.Gateways;
 using BookingApp.Models;
 using System;
 using System.Collections.Generic;

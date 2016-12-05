@@ -1,6 +1,9 @@
-﻿using System;
+﻿using BookingApp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 
 namespace BookingApp.Gateways
@@ -19,7 +22,20 @@ namespace BookingApp.Gateways
 
         public List<Room> Read()
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.GetAsync("api/rooms").Result;
+                if (response.IsSuccessStatusCode)
+                { 
+                    return response.Content.ReadAsAsync<List<Room>>().Result;
+                }
+            }
+            return new List<Room>();
         }
 
         public Room Read(int id)

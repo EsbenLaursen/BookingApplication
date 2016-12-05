@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BookingApp
+namespace BookingApp.Entities
 {
    
     public class Room

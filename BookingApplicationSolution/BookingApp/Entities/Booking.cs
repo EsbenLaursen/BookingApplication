@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BookingApp
+namespace BookingApp.Entities
 {
   
     public class Booking 

@@ -1,4 +1,5 @@
-﻿using BookingApp.Gateways;
+﻿using BookingApp.Entities;
+using BookingApp.Gateways;
 using BookingApp.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace BookingApp.Controllers
     {
 
         IServiceGateway<Booking> bg = new DllFacade().GetBookingGateway();
+        IServiceGateway<Customer> cm = new DllFacade().GetCustomerGateway();
         // GET: Booking
         public ActionResult Index()
         {
@@ -27,7 +29,24 @@ namespace BookingApp.Controllers
         
         public ActionResult BookingCheckout()
         {
-            return View();
+            BookingIndexViewModel viewModel = new BookingIndexViewModel()
+            {
+                Bookings = bg.Read()
+            };
+            CheckRoomAvailability check = new CheckRoomAvailability();
+            List<DateTime> dates = check.Check(DateTime.Now, DateTime.Now.AddDays(10));
+
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        public ActionResult BookingCheckout(Customer c)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("BookingCheckout");
+            }
+            return View(c);
         }
     }
 }
