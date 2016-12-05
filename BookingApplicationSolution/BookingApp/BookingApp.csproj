@@ -278,6 +278,7 @@
     <Content Include="Views\Home\Booking.cshtml" />
     <Content Include="Views\Booking\BookingCheckout.cshtml" />
     <Content Include="Views\Booking\Index.cshtml" />
+    <Content Include="Views\Booking\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
