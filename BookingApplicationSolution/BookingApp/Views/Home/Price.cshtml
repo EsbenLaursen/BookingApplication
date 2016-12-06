@@ -8,7 +8,8 @@
 </head>
 
 <h2>Price</h2>
-<div id="pricing-table" class="clear">
+<div class="plan">
+<div id="pricing-table" class="clear" >
     @foreach (var item in @Model.footCare)
     {
         <div class="plan">
@@ -38,6 +39,6 @@
                 <li><b>@Html.DisplayFor(modelItem => item.Persons)</b> Persons</li>
             </ul>
         </div>
-    }
+    }</div>
 </div>
 
