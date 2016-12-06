@@ -58,7 +58,7 @@ namespace BookingApp.Gateways
 
                 HttpResponseMessage response = client.GetAsync("api/bookings").Result;
                 if (response.IsSuccessStatusCode)
-                { //JsonConvert.DeserializeObject<List<Booking>>(
+                { 
                     return response.Content.ReadAsAsync<List<Booking>>().Result;
                 }
             }

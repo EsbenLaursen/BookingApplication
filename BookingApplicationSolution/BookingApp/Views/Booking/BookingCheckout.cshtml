@@ -118,20 +118,16 @@
             $("#refreshBtn").click(function () {
 
             var dateArray = [];
+            var data = @Html.Raw(Json.Encode(Model.UnavailableDates));
 
-            var data = @Html.Raw(Json.Encode(Model.Bookings));
-
-            for(var key in data)
-            {
-                if (data.hasOwnProperty(key)) {
-
-                    var newEndDate = convertDate(data[key]['EndDate']);
-                    var newStartDate = convertDate(data[key]['StartDate']);
-                    for (var d = new Date(newStartDate) ; d <= new Date(newEndDate) ; d.setDate(d.getDate() + 1)) {
-                        dateArray.push($.datepicker.formatDate('yy-mm-dd', d));
+                for(var key in data)
+                {
+                    if (data.hasOwnProperty(key)) {
+                        var thedate = convertDate(data[key]);
+                        var newDate = new Date(thedate);
+                        dateArray.push($.datepicker.formatDate('yy-mm-dd', newDate));
                     }
-                }
-            }
+                }  
 
             $('#datepicker3').datepicker({
                 beforeShowDay:
