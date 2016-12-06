@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 
 namespace BookingApp.Gateways
@@ -27,13 +29,13 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = client.GetAsync("api/bookings").Result;
+                HttpResponseMessage response = client.GetAsync("api/FootCares").Result;
                 if (response.IsSuccessStatusCode)
                 { //JsonConvert.DeserializeObject<List<Booking>>(
-                    return response.Content.ReadAsAsync<List<Booking>>().Result;
+                    return response.Content.ReadAsAsync<List<FootCare>>().Result;
                 }
             }
-            return new List<Booking>();
+            return new List<FootCare>();
         }
 
         public FootCare Read(int id)
@@ -45,11 +47,11 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.GetAsync("/api/bookings/" + id).Result;
+                var response = client.GetAsync("/api/FootCares/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
 
-                    return response.Content.ReadAsAsync<Booking>().Result;
+                    return response.Content.ReadAsAsync<FootCare>().Result;
                 }
             }
             return null;
