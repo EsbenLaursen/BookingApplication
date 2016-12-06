@@ -5,70 +5,7 @@
 }
 
 <h2>Booking Checkout</h2>
-
-
-
-@*<div class="container">
-    @using (Html.BeginForm("BookingCheckout", "Booking"))
-    {
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="row">
-            <div class="col-sm-5">
-                @Html.Label("Første navn")
-                @Html.EditorFor(model => model.FirstName)
-                @Html.ValidationMessageFor(model => model.FirstName)
-            </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-6"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-5">
-                @Html.Label("Sidste navn")
-                @Html.EditorFor(model => model.LastName)
-                @Html.ValidationMessageFor(model => model.LastName)
-            </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-6"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-5">
-                @Html.Label("Mobilnummer")
-                @Html.EditorFor(model => model.Telephone)
-                @Html.ValidationMessageFor(model => model.Telephone)
-            </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-6"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-5">
-                @Html.Label("Email")
-                @Html.EditorFor(model => model.Email)
-                @Html.ValidationMessageFor(model => model.Email)
-
-            </div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-6"></div>
-        </div>
-
-        <input type="submit" value="Confirm" class="btn btn-success" />
-
-
-
-        }
-
-        <br />
-        <br />
-*@
-        
-<form>
-    @foreach (var b in Model.Bookings)
-    {
-        <p>@b.StartDate</p>
-        
-        <p>@b.EndDate</p>
-    }
-</form>
-
+       
 
         <div class="panel panel-default">
             <div class="panel-heading">Bjørn Eksperiment Zone.</div>

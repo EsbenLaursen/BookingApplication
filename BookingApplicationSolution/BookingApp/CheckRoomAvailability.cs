@@ -104,47 +104,6 @@ namespace BookingApp
             }
             return UnavailableDates;
         }
-
-
-
-
-        public List<DateTime> FetchUnavailableDate()
-        {
-            List<DateTime> allDates = new List<DateTime>();
-
-            var start = DateTime.Now;
-            var end = DateTime.Now.AddYears(1);
-            for (var dt = start; dt <= end; dt = dt.AddDays(1))
-            {
-                allDates.Add(dt);
-            }
-
-            for (int i = 0; i < allDates.Count; i++)
-            {
-                foreach (var b in Bookings)
-                {
-                    bool isUnavalable = false;
-                    int roomsUnavailable = 0;
-                    var bookedDates = new List<DateTime>();
-                    for (var dt = b.StartDate; dt <= b.EndDate; dt = dt.AddDays(1))
-                    {
-                        bookedDates.Add(dt);
-                    }
-                    foreach (var r in b.Room)
-                    {
-                        if (bookedDates.Any(x => x.Day == allDates[i].Day && x.Month == allDates[i].Month && x.Year == allDates[i].Year))
-                        {
-                            roomsUnavailable++;
-                        }
-                    }
-                    if (roomsUnavailable == 3)
-                    {
-                        isUnavalable = true; //Means dat date should be disabledø
-                        //add date to list
-                    }
-                }
-            }
-            return allDates;
-        }
+        
     }
 }
