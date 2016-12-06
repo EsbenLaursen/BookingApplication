@@ -20,7 +20,7 @@ namespace BookingApp
             Bookings = bg.Read();
         }
 
-        public List<DateTime> Check(DateTime start, DateTime end)
+        public List<Room> Check(DateTime start, DateTime end)
         {
             var dates = new List<DateTime>();
             for (var dt = start; dt <= end; dt = dt.AddDays(1))
@@ -28,9 +28,123 @@ namespace BookingApp
                 dates.Add(dt);
             }
 
-            return dates;
+            List<Room> RoomsAvailable = new List<Room>();
+
+            foreach (var r1 in Rooms)//3rooms
+            {
+                    bool succes = true;
+                    foreach(var b in Bookings)
+                    {
+                        foreach(var r in b.Room)
+                        {
+                            if (r.Name == r1.Name)
+                            {
+                                for (var dt = b.StartDate; dt <= b.EndDate; dt = dt.AddDays(1))
+                                {
+                                    if (dates.Any(x => x.Day == dt.Day && x.Month == dt.Month && x.Year == dt.Year))
+                                    {
+                                      succes = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (succes)
+                    {
+                        RoomsAvailable.Add(r1);
+                    }
+            }  
+            
+            return RoomsAvailable;
         }
 
 
+        public List<DateTime> FetchUnavailableDates2()
+        {
+            List<DateTime> room1 = new List<DateTime>();
+            List<DateTime> room2 = new List<DateTime>();
+            List<DateTime> room3 = new List<DateTime>();
+
+            List<DateTime> UnavailableDates = new List<DateTime>();
+
+            foreach (var b in Bookings)
+            {
+                foreach (var r in b.Room)
+                {
+                    if (r.Id == 1)
+                    {
+                        for (var dt = b.StartDate; dt <= b.EndDate; dt = dt.AddDays(1))
+                        {
+                            room1.Add(dt);
+                        }
+                    }
+                    else if (r.Id == 2)
+                    {
+                        for (var dt = b.StartDate; dt <= b.EndDate; dt = dt.AddDays(1))
+                        {
+                            room2.Add(dt);
+                        }
+                    }
+                    else
+                    {
+                        for (var dt = b.StartDate; dt <= b.EndDate; dt = dt.AddDays(1))
+                        {
+                            room3.Add(dt);
+                        }
+                    }
+                }
+            }
+
+            foreach (var d in room1)
+            {
+                if (room2.Any(x => x.Day == d.Day && x.Month == d.Month && x.Year == d.Year) && room3.Any(x => x.Day == d.Day && x.Month == d.Month && x.Year == d.Year))
+                {
+                    UnavailableDates.Add(d);
+                }
+            }
+            return UnavailableDates;
+        }
+
+
+
+
+        public List<DateTime> FetchUnavailableDate()
+        {
+            List<DateTime> allDates = new List<DateTime>();
+
+            var start = DateTime.Now;
+            var end = DateTime.Now.AddYears(1);
+            for (var dt = start; dt <= end; dt = dt.AddDays(1))
+            {
+                allDates.Add(dt);
+            }
+
+            for (int i = 0; i < allDates.Count; i++)
+            {
+                foreach (var b in Bookings)
+                {
+                    bool isUnavalable = false;
+                    int roomsUnavailable = 0;
+                    var bookedDates = new List<DateTime>();
+                    for (var dt = b.StartDate; dt <= b.EndDate; dt = dt.AddDays(1))
+                    {
+                        bookedDates.Add(dt);
+                    }
+                    foreach (var r in b.Room)
+                    {
+                        if (bookedDates.Any(x => x.Day == allDates[i].Day && x.Month == allDates[i].Month && x.Year == allDates[i].Year))
+                        {
+                            roomsUnavailable++;
+                        }
+                    }
+                    if (roomsUnavailable == 3)
+                    {
+                        isUnavalable = true; //Means dat date should be disabledø
+                        //add date to list
+                    }
+                }
+            }
+            return allDates;
+        }
     }
 }

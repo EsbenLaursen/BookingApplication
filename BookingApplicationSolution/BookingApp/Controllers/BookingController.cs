@@ -31,14 +31,17 @@ namespace BookingApp.Controllers
 
         public ActionResult BookingCheckout()
         {
+            CheckRoomAvailability check = new CheckRoomAvailability();
+        
+            //Test
+            List<DateTime> dates = check.FetchUnavailableDates2();
+
             BookingIndexViewModel viewModel = new BookingIndexViewModel()
             {
-                Bookings = bg.Read()
+                Bookings = bg.Read(),
+                UnavailableDates = dates
             };
-            CheckRoomAvailability check = new CheckRoomAvailability();
-            List<DateTime> dates = check.Check(DateTime.Now, DateTime.Now.AddDays(10));
-
-
+           
             return View(viewModel);
         }
         [HttpPost]
@@ -49,6 +52,19 @@ namespace BookingApp.Controllers
                 return RedirectToAction("BookingCheckout");
             }
             return View(c);
+        }
+
+        [HttpPost]
+        public ActionResult Search(DateTime from, DateTime to)
+        {
+            CheckRoomAvailability check = new CheckRoomAvailability();
+            List<Room> AvailableRooms = check.Check(from, to);
+
+            //Test
+            List<DateTime> dates = check.FetchUnavailableDates2();
+
+
+            return View(AvailableRooms);
         }
     }
 }

@@ -1,14 +1,33 @@
 ﻿<html>
 <body>
     
-    <form style="padding-top: 5%">
+    @*<form style="padding-top: 5%" >
         Choose a date:
 <br />
         From:
         <input type="date" name="from" min="@DateTime.Now.ToString("yyyy-MM-dd")"> 
         To:
         <input type="date" name="to" min="@DateTime.Now.ToString("yyyy-MM-dd")"> 
-    </form>
+    </form>*@
+
+
+
+    @using (Html.BeginForm("Search", "Booking"))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <input type="date" name="from" min="@DateTime.Now.ToString("yyyy-MM-dd")"> 
+        </div>
+        <div class="row">
+            <input type="date" name="to" min="@DateTime.Now.ToString("yyyy-MM-dd")"> 
+        </div>
+
+        <input type="submit" value="Confirm" class="btn btn-success" />
+
+
+
+    }
+
 
 </body>
 </html>

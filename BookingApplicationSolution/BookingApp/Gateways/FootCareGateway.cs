@@ -29,19 +29,32 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = client.GetAsync("api/Footcares").Result;
+                HttpResponseMessage response = client.GetAsync("api/FootCares").Result;
                 if (response.IsSuccessStatusCode)
-                { //JsonConvert.DeserializeObject<List<Footcare>>(
+                { //JsonConvert.DeserializeObject<List<Booking>>(
                     return response.Content.ReadAsAsync<List<FootCare>>().Result;
                 }
             }
             return new List<FootCare>();
         }
 
-
         public FootCare Read(int id)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = client.GetAsync("/api/FootCares/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+
+                    return response.Content.ReadAsAsync<FootCare>().Result;
+                }
+            }
+            return null;
         }
 
         public FootCare Update(FootCare t)
