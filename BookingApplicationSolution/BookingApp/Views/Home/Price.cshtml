@@ -2,43 +2,51 @@
 
 @{
     ViewBag.Title = "title";
-}t
+}
 <head>
     <link rel="stylesheet" href="../../Content/StylesheetPrice.css">
 </head>
 
 <h2>Price</h2>
 <div class="plan">
-<div id="pricing-table" class="clear" >
-    @foreach (var item in @Model.footCare)
-    {
-        <div class="plan">
-            <h3>
-                @Html.DisplayFor(modelItem => item.Name)
-                <span>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </span>
-            </h3>
-            <ul>
-                <li><b>@Html.DisplayFor(modelItem => item.Description)</b></li>
-                <li><b>@Html.DisplayFor(modelItem => item.Duration)</b> Hours</li>
-            </ul>
-        </div>
-    }
-    @foreach (var item in @Model.Rooms)
-    {
-        <div class="plan">
-            <h3>
-                @Html.DisplayFor(modelItem => item.Name)
-                <span>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </span>
-            </h3>
-            <ul>
-                <li><b>@Html.DisplayFor(modelItem => item.Description)</b></li>
-                <li><b>@Html.DisplayFor(modelItem => item.Persons)</b> Persons</li>
-            </ul>
-        </div>
-    }</div>
-</div>
+    <div id="pricing-table" class="clear">
+        @foreach (var item in @Model.footCare)
+        {
+            <div class="plan">
+                <h3>
+                    @Html.DisplayFor(modelItem => item.Name)
+                    <span>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </span>
+                </h3>
+                <ul>
+                    <li><b>@Html.DisplayFor(modelItem => item.Description)</b></li>
+                    <li><b>@Html.DisplayFor(modelItem => item.Duration)</b> Hours</li>
 
+                </ul>
+
+            </div>
+        }
+    </div>
+</div>
+<div class="plan">
+    <div id="pricing-table" class="clear">
+        @foreach (var item in @Model.Rooms)
+        {
+            <div class="plan">
+
+                <h3>
+                    @Html.DisplayFor(modelItem => item.Name)
+                    <span>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </span>
+                </h3>
+                <ul>
+
+                    <li><b>@Html.DisplayFor(modelItem => item.Description)</b></li>
+                    <li><b>@Html.DisplayFor(modelItem => item.Persons)</b> Persons</li>
+                </ul>
+            </div>
+        }
+    </div>
+</div>
