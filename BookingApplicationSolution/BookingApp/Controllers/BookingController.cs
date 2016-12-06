@@ -1,6 +1,7 @@
 ﻿using BookingApp.Entities;
 using BookingApp.Gateways;
 using BookingApp.Models;
+using CloudinaryDotNet;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,14 +17,18 @@ namespace BookingApp.Controllers
 
         IServiceGateway<Booking> bg = new DllFacade().GetBookingGateway();
         IServiceGateway<Customer> cm = new DllFacade().GetCustomerGateway();
+        IServiceGateway<Room> rm = new DllFacade().GetRoomGateway();
         // GET: Booking
         public ActionResult Index()
         {
-
+            CheckRoomAvailability check = new CheckRoomAvailability();
+            List<DateTime> dates = check.FetchUnavailableDates2();
             BookingIndexViewModel viewModel = new BookingIndexViewModel()
             {
-                Bookings = bg.Read()
+                Bookings = bg.Read(),
+                UnavailableDates = dates
             };
+
             return View(viewModel);
         }
 
@@ -32,7 +37,6 @@ namespace BookingApp.Controllers
         public ActionResult BookingCheckout()
         {
             CheckRoomAvailability check = new CheckRoomAvailability();
-        
             //Test
             List<DateTime> dates = check.FetchUnavailableDates2();
 
@@ -44,6 +48,29 @@ namespace BookingApp.Controllers
            
             return View(viewModel);
         }
+
+        [HttpPost]
+        public ActionResult CustomerInformation(int[] ids)
+        {
+            if (ids.Length==0)
+            {
+                return RedirectToAction("RoomsAvailable");
+            }
+            List<Room> rooms = new List<Room>();
+            foreach(var i in ids)
+            {
+                rooms.Add(rm.Read(i));
+            }
+            CustomerInfoViewModel viewModel = new CustomerInfoViewModel() {
+                Rooms = rooms
+            };
+
+         
+            return View(viewModel);
+        }
+
+
+
         [HttpPost]
         public ActionResult BookingCheckout(Customer c)
         {
@@ -55,7 +82,7 @@ namespace BookingApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Search(DateTime from, DateTime to)
+        public ActionResult RoomsAvailable(DateTime from, DateTime to)
         {
             CheckRoomAvailability check = new CheckRoomAvailability();
             List<Room> AvailableRooms = check.Check(from, to);

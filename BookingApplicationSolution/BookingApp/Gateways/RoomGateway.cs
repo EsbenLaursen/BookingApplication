@@ -40,7 +40,21 @@ namespace BookingApp.Gateways
 
         public Room Read(int id)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = client.GetAsync("/api/rooms/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+
+                    return response.Content.ReadAsAsync<Room>().Result;
+                }
+            }
+            return null;
         }
 
         public Room Update(Room t)
