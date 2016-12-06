@@ -11,6 +11,7 @@ namespace BookingApp.Controllers
 {
     public class HomeController : Controller
     {
+        private IServiceGateway<Image> im = new DllFacade().GetImageGateway(); 
         IServiceGateway<Booking> bg = new DllFacade().GetBookingGateway();
         private IServiceGateway<FootCare> fc = new DllFacade().GetSFootCareGateway();
         private IServiceGateway<Room> rm = new DllFacade().GetRoomGateway();
@@ -49,7 +50,11 @@ namespace BookingApp.Controllers
 
         public ActionResult Gallery()
         {
-            return View();
+            var ig = new ImageViewModel()
+            {
+                Images = im.Read()
+            };
+            return View(ig);
         }
 
         public ActionResult Booking()

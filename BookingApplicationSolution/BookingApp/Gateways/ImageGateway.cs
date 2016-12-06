@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 
 namespace BookingApp.Gateways
@@ -20,13 +22,41 @@ namespace BookingApp.Gateways
 
         public List<Image> Read()
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.GetAsync("api/Images").Result;
+                if (response.IsSuccessStatusCode)
+                { //JsonConvert.DeserializeObject<List<Booking>>(
+                    return response.Content.ReadAsAsync<List<Image>>().Result;
+                }
+            }
+            return new List<Image>();
         }
 
         public Image Read(int id)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = client.GetAsync("/api/Images/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+
+                    return response.Content.ReadAsAsync<Image>().Result;
+                }
+            }
+            return null;
         }
+
 
         public Image Update(Image t)
         {
