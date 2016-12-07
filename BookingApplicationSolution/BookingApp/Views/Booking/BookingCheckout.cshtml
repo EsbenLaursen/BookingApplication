@@ -1,23 +1,41 @@
 ﻿@model BookingApp.Models.CheckoutViewModel
 
-
+<head>
+    <link href="~/Content/checkoutstyle.css" rel="stylesheet" />
+</head>
 
 @using (Html.BeginForm("SendEmail", "Booking"))
-{ 
-
-<h2>Confirm Booking Checkout </h2>
-
-<label> First Name : @Model.TemporaryBooking.CustomerFirstname</label>
-<label> Last Name : @Model.TemporaryBooking.CustomerLastname</label>
-<label> Email : @Model.TemporaryBooking.CustomerEmail</label>
-<label> Phonenr : @Model.TemporaryBooking.CustomerPhoneNr</label>
-<label> Start Date : @Model.TemporaryBooking.StartDate</label>
-<label> End Date : @Model.TemporaryBooking.EndDate</label>
-
-foreach (var v in Model.TemporaryBooking.Rooms)
 {
-    <p>@v.Name</p>
-}
 
-<input type="submit" value="confirm" class="btn btn-success" />
+    <h2>Confirm Booking Checkout </h2>
+    <div class="container, stylez">
+        
+        ´
+        <div><label> First Name: </label> @Model.TemporaryBooking.CustomerFirstname</div>
+
+        <br />
+        <div><label> Last Name: </label> @Model.TemporaryBooking.CustomerLastname</div>
+
+        <br />
+        <div><label> Email: </label> @Model.TemporaryBooking.CustomerEmail</div>
+
+        <br />
+        <div><label> Phonenr: </label> @Model.TemporaryBooking.CustomerPhoneNr</div>
+
+        <br />
+        <div> <label> Start Date </label>: @Model.TemporaryBooking.StartDate</div>
+
+        <br />
+        <div> <label> End Date: </label> @Model.TemporaryBooking.EndDate</div>
+
+        <br />
+        <label>Room(s):</label>
+        @foreach (var v in Model.TemporaryBooking.Rooms)
+        {
+
+            <p>@v.Name</p>
+        }
+
+        <input type="submit" value="confirm" class="btn btn-success" />
+    </div>
 }
