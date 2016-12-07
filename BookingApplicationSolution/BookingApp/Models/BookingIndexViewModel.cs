@@ -11,6 +11,5 @@ namespace BookingApp.Models
     {
         public List<Booking> Bookings { get; set; }
         public List<DateTime> UnavailableDates { get; set; }
-        
     }
 }
