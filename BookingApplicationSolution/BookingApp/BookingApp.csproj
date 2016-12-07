@@ -215,6 +215,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BookingConfirmViewModel.cs" />
     <Compile Include="Models\BookingIndexViewModel.cs" />
     <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\CustomerInfoViewModel.cs" />
@@ -309,8 +310,8 @@
     <Content Include="Views\Home\Price.cshtml" />
     <Content Include="Views\Home\Gallery.cshtml" />
     <Content Include="Views\Home\Booking.cshtml" />
-    <Content Include="Views\Booking\BookingCheckout.cshtml" />
-    <Content Include="Views\Booking\Index.cshtml" />
+    <Content Include="Views\Account\Booking\BookingCheckout.cshtml" />
+    <Content Include="Views\Account\Booking\Index.cshtml" />
     <Content Include="Views\Prices\Index.cshtml" />
     <Content Include="Views\Booking\CustomerInformation.cshtml" />
     <Content Include="Views\Booking\RoomsAvailable.cshtml" />
