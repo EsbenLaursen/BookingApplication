@@ -18,6 +18,10 @@ namespace BookingApp.Controllers
         IServiceGateway<Booking> bg = new DllFacade().GetBookingGateway();
         IServiceGateway<Customer> cm = new DllFacade().GetCustomerGateway();
         IServiceGateway<Room> rm = new DllFacade().GetRoomGateway();
+        IServiceGateway<TemporaryBooking> tm = new DllFacade().GetTempBookingGateway();
+        EmailGateway egw = new DllFacade().GetEmailGateway();
+
+        // GET: Booking
         public ActionResult Index()
         {
             CheckRoomAvailability check = new CheckRoomAvailability();
@@ -30,19 +34,46 @@ namespace BookingApp.Controllers
 
             return View(viewModel);
         }
+
         [HttpPost]
         public ActionResult RoomsAvailable(DateTime from, DateTime to)
         {
             CheckRoomAvailability check = new CheckRoomAvailability();
-            List<Room> AvailableRooms = check.Check(from, to);
+            RoomsAvailableViewModel ravm = new RoomsAvailableViewModel()
+            {
+                Rooms = check.Check(from, to),
+                To = to,
+                From = from
+            };
+
 
             //Test
             List<DateTime> dates = check.FetchUnavailableDates2();
 
 
-            return View(AvailableRooms);
+            return View(ravm);
         }
-        [HttpGet]
+
+        [HttpPost]
+        public ActionResult GetRooms(int[] ids, DateTime to, DateTime from)
+        {
+            if (ids.Length == 0)
+            {
+                return RedirectToAction("RoomsAvailable");
+            }
+            List<Room> rooms = new List<Room>();
+
+            foreach (var i in ids)
+            {
+                rooms.Add(rm.Read(i));
+            }
+            Session["Rooms"] = rooms;
+            Session["to"] = to;
+            Session["from"] = from;
+
+            return RedirectToAction("CustomerInformation", FormMethod.Get);
+        }
+
         public ActionResult CustomerInformation()
         {
             return View();
@@ -53,40 +84,62 @@ namespace BookingApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                Session["Customer"] = c;
+                Session["customer"] = c;
                 return RedirectToAction("BookingCheckout");
             }
             return View(c);
         }
 
+
+
+
         [HttpGet]
         public ActionResult BookingCheckout()
-        {
-            BookingConfirmViewModel viewModel = new BookingConfirmViewModel()
-            {
-                
-                Customer = Session["Customer"] as Customer,
-                Rooms = Session["Rooms"] as List<Room>
-            };
 
-            return View(viewModel);
+        {
+
+            var c = Session["customer"] as Customer;
+
+            var vm = new CheckoutViewModel();
+            vm.TemporaryBooking = new TemporaryBooking()
+            {
+                Rooms = Session["Rooms"] as List<Room>,
+
+                CustomerEmail = c.Email,
+                CustomerFirstname = c.FirstName,
+                CustomerLastname = c.LastName,
+                CustomerPhoneNr = c.Telephone,
+                EndDate = (DateTime)Session["to"],
+                StartDate = (DateTime)Session["from"],
+            };
+            Session["temp"] = vm.TemporaryBooking;
+            return View(vm);
         }
 
         [HttpPost]
-        public ActionResult GetRooms(int[] ids)
-        {
-            if (ids.Length == 0)
+        public ActionResult SendEmail( )
+        { 
+            var email = Session["temp"] as TemporaryBooking;
+            EmailFormModel efm = new EmailFormModel();
+
+            efm.FromName = email.CustomerFirstname + " " + email.CustomerLastname;
+            efm.FromEmail = email.CustomerEmail;
+            efm.Message = "Dates: " + email.StartDate.ToShortDateString() + " - " + email.EndDate.ToShortDateString();
+                
+
+            
+            var check = egw.SendMail(efm);
+            if (check)
             {
-                return RedirectToAction("RoomsAvailable");
+                tm.Create(email);
             }
-            List<Room> rooms = new List<Room>();
-            foreach (var i in ids)
+            else
             {
-                rooms.Add(rm.Read(i));
+                return new HttpNotFoundResult("Could not send email");
             }
-            Session["Rooms"] = rooms;
-            return RedirectToAction("CustomerInformation", FormMethod.Get);
+            return View();
         }
+
 
     }
 }

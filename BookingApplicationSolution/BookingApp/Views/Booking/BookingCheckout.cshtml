@@ -1,0 +1,23 @@
+﻿@model BookingApp.Models.CheckoutViewModel
+
+
+
+@using (Html.BeginForm("SendEmail", "Booking"))
+{ 
+
+<h2>Confirm Booking Checkout </h2>
+
+<label> First Name : @Model.TemporaryBooking.CustomerFirstname</label>
+<label> Last Name : @Model.TemporaryBooking.CustomerLastname</label>
+<label> Email : @Model.TemporaryBooking.CustomerEmail</label>
+<label> Phonenr : @Model.TemporaryBooking.CustomerPhoneNr</label>
+<label> Start Date : @Model.TemporaryBooking.StartDate</label>
+<label> End Date : @Model.TemporaryBooking.EndDate</label>
+
+foreach (var v in Model.TemporaryBooking.Rooms)
+{
+    <p>@v.Name</p>
+}
+
+<input type="submit" value="confirm" class="btn btn-success" />
+}

@@ -172,6 +172,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Danish.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Danish.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\English.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>English.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\German.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>German.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -187,23 +202,29 @@
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\FootCare.cs" />
     <Compile Include="Entities\Image.cs" />
+    <Compile Include="Entities\TemporaryBooking.cs" />
     <Compile Include="Gateways\BookingGateway.cs" />
     <Compile Include="Gateways\CustomerGateway.cs" />
+    <Compile Include="Gateways\EmailGateway.cs" />
     <Compile Include="Gateways\FootCareGateway.cs" />
     <Compile Include="Gateways\ImageGateway.cs" />
     <Compile Include="Gateways\IServiceGateway.cs" />
     <Compile Include="Gateways\RoomGateway.cs" />
+    <Compile Include="Gateways\TemporaryBookingGateway.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookingConfirmViewModel.cs" />
     <Compile Include="Models\BookingIndexViewModel.cs" />
+    <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\CustomerInfoViewModel.cs" />
+    <Compile Include="Models\EmailFormModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PriceViewModel.cs" />
+    <Compile Include="Models\RoomsAvailableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Room.cs" />
     <Compile Include="Startup.cs" />
@@ -289,9 +310,10 @@
     <Content Include="Views\Account\Booking\BookingCheckout.cshtml" />
     <Content Include="Views\Account\Booking\Index.cshtml" />
     <Content Include="Views\Prices\Index.cshtml" />
-    <Content Include="Views\Account\Booking\RoomsAvailable.cshtml" />
-    <Content Include="Views\Account\Booking\CustomerInformation.cshtml" />
-    <Content Include="Views\Account\Booking\Search.cshtml" />
+    <Content Include="Views\Booking\CustomerInformation.cshtml" />
+    <Content Include="Views\Booking\RoomsAvailable.cshtml" />
+    <Content Include="Views\Booking\Search.cshtml" />
+    <Content Include="Views\Booking\SendEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -299,6 +321,24 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\English.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>English.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\German.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>German.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Danish.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Danish.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

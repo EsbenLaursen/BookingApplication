@@ -1,4 +1,4 @@
-﻿@model List<BookingApp.Entities.Room>
+﻿@model BookingApp.Models.RoomsAvailableViewModel
 
 <head>
     <link href="~/Content/tableroomsavailable.css" rel="stylesheet" />
@@ -6,54 +6,57 @@
 <body>
     @using (Html.BeginForm("GetRooms", "Booking"))
     { 
-    <div class="container">
-        <div class="row">
-            <section class="content">
-                <h1>Rooms available</h1>
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="table-container">
-                                <table class="table table-filter">
-                                    <tbody>
-                                        @foreach (var r in Model)
+        
+        <div class="container">
+            <input type="hidden" name="to" value="@Model.To"/>
+            <input type="hidden" name="from" value="@Model.From" />
+            <div class="row">
+                <section class="content">
+                    <h1>Rooms available</h1>
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="table-container">
+                                    <table class="table table-filter">
+                                        <tbody>
+                                        @foreach (var r in Model.Rooms)
                                         {
-                                        <tr>
-                                            <td>
-                                                <div class="ckbox">
-                                                    <input type="checkbox" name="ids" value="@r.Id">
-                                                </div>
-                                            </td>
-                                            <td >
-                                                <div>
-                                                    <div class="pull-left">
-                                                        <img src="http://www.dangleterre.com/uploads/images/PanelImages/General/test_room.jpg" style="height:160px; width:240px">
+                                            <tr>
+                                                <td>
+                                                    <div class="ckbox">
+                                                        <input type="checkbox" name="ids" value="@r.Id">
                                                     </div>
-                                                    
-                                                </div>
-                                               
-                                            </td>
-                                            <td>
-                                                <div >
-                                                    <h4 class="title">
-                                                        @r.Name
-                                                    </h4>
-                                                    <p class="summary">@r.Description</p>
-                                                </div>
-                                            </td>
-                                            
-                                        </tr>
-                                            }
-                                    </tbody>
-                                </table>
-                                <input type="submit" class="btn btn-success" value="Move on bitch" />
+                                                </td>
+                                                <td >
+                                                    <div>
+                                                        <div class="pull-left">
+                                                            <img src="http://www.dangleterre.com/uploads/images/PanelImages/General/test_room.jpg" style="height: 160px; width: 240px">
+                                                        </div>
+
+                                                    </div>
+
+                                                </td>
+                                                <td>
+                                                    <div >
+                                                        <h4 class="title">
+                                                            @r.Name
+                                                        </h4>
+                                                        <p class="summary">@r.Description</p>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        }
+                                        </tbody>
+                                    </table>
+                                    <input type="submit" class="btn btn-success" value="Move on bitch"/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
+            </div>
         </div>
-    </div>
     }
 </body>
