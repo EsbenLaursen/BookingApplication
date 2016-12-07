@@ -6,10 +6,9 @@ using System.Web;
 
 namespace BookingApp.Models
 {
-    public class CustomerInfoViewModel
+    public class BookingConfirmViewModel
     {
-        public Customer Customer { get; set; }
         public List<Room> Rooms { get; set; }
-        public int[] Ids { get; set; }
+        public Customer Customer { get; set; }
     }
 }
