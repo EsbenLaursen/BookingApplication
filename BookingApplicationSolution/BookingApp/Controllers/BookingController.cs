@@ -18,6 +18,9 @@ namespace BookingApp.Controllers
         IServiceGateway<Booking> bg = new DllFacade().GetBookingGateway();
         IServiceGateway<Customer> cm = new DllFacade().GetCustomerGateway();
         IServiceGateway<Room> rm = new DllFacade().GetRoomGateway();
+        IServiceGateway<TemporaryBooking> tm = new DllFacade().GetTempBookingGateway();
+        EmailGateway egw = new DllFacade().GetEmailGateway();
+
         // GET: Booking
         public ActionResult Index()
         {
@@ -32,66 +35,111 @@ namespace BookingApp.Controllers
             return View(viewModel);
         }
 
-        //Post: booking
-
-        public ActionResult BookingCheckout()
+        [HttpPost]
+        public ActionResult RoomsAvailable(DateTime from, DateTime to)
         {
             CheckRoomAvailability check = new CheckRoomAvailability();
+            RoomsAvailableViewModel ravm = new RoomsAvailableViewModel()
+            {
+                Rooms = check.Check(from, to),
+                To = to,
+                From = from
+            };
+
+
             //Test
             List<DateTime> dates = check.FetchUnavailableDates2();
 
-            BookingIndexViewModel viewModel = new BookingIndexViewModel()
-            {
-                Bookings = bg.Read(),
-                UnavailableDates = dates
-            };
-           
-            return View(viewModel);
+
+            return View(ravm);
         }
 
         [HttpPost]
-        public ActionResult CustomerInformation(int[] ids)
+        public ActionResult GetRooms(int[] ids, DateTime to, DateTime from)
         {
-            if (ids.Length==0)
+            if (ids.Length == 0)
             {
                 return RedirectToAction("RoomsAvailable");
             }
             List<Room> rooms = new List<Room>();
-            foreach(var i in ids)
+
+            foreach (var i in ids)
             {
                 rooms.Add(rm.Read(i));
             }
-            CustomerInfoViewModel viewModel = new CustomerInfoViewModel() {
-                Rooms = rooms
-            };
+            Session["Rooms"] = rooms;
+            Session["to"] = to;
+            Session["from"] = from;
 
-         
-            return View(viewModel);
+            return RedirectToAction("CustomerInformation", FormMethod.Get);
         }
 
-
+        public ActionResult CustomerInformation()
+        {
+            return View();
+        }
 
         [HttpPost]
-        public ActionResult BookingCheckout(Customer c)
+        public ActionResult CustomerInformation(Customer c)
         {
             if (ModelState.IsValid)
             {
+                Session["customer"] = c;
                 return RedirectToAction("BookingCheckout");
             }
             return View(c);
         }
 
-        [HttpPost]
-        public ActionResult RoomsAvailable(DateTime from, DateTime to)
+
+
+
+        [HttpGet]
+        public ActionResult BookingCheckout()
+
         {
-            CheckRoomAvailability check = new CheckRoomAvailability();
-            List<Room> AvailableRooms = check.Check(from, to);
 
-            //Test
-            List<DateTime> dates = check.FetchUnavailableDates2();
+            var c = Session["customer"] as Customer;
 
+            var vm = new CheckoutViewModel();
+            vm.TemporaryBooking = new TemporaryBooking()
+            {
+                Rooms = Session["Rooms"] as List<Room>,
 
-            return View(AvailableRooms);
+                CustomerEmail = c.Email,
+                CustomerFirstname = c.FirstName,
+                CustomerLastname = c.LastName,
+                CustomerPhoneNr = c.Telephone,
+                EndDate = (DateTime)Session["to"],
+                StartDate = (DateTime)Session["from"],
+            };
+            Session["temp"] = vm.TemporaryBooking;
+            return View(vm);
         }
+
+        [HttpPost]
+        public ActionResult SendEmail( )
+        { 
+            var email = Session["temp"] as TemporaryBooking;
+            EmailFormModel efm = new EmailFormModel();
+
+            efm.FromName = email.CustomerFirstname + " " + email.CustomerLastname;
+            efm.FromEmail = email.CustomerEmail;
+            efm.Message = "Dates: " + email.StartDate.ToShortDateString() + " - " + email.EndDate.ToShortDateString();
+                
+
+            
+            var check = egw.SendMail(efm);
+            if (check)
+            {
+                tm.Create(email);
+            }
+            else
+            {
+                return new HttpNotFoundResult("Could not send email");
+            }
+            return View();
+        }
+
+
     }
 }

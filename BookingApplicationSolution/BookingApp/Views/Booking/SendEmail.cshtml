@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "SendEmail";
+}
+
+<h2>Booking success</h2>
+
+<p> Your Booking request has been sent and is awaiting confirmation. You will receive an email when the booking is confirmed.</p>
+@using (Html.BeginForm("Index", "Home"))
+{
+<input type="submit" class="btn btn-success" value="ok"/>
+}
+

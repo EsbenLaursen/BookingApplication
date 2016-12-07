@@ -9,6 +9,15 @@ namespace BookingApp
 {
     public class DllFacade
     {
+
+        public EmailGateway GetEmailGateway()
+        {
+            return new EmailGateway();
+        }
+        public IServiceGateway<TemporaryBooking> GetTempBookingGateway()
+        {
+            return new TemporaryBookingGateway();
+        }
         public IServiceGateway<Booking> GetBookingGateway()
         {
             return new BookingGateway();
