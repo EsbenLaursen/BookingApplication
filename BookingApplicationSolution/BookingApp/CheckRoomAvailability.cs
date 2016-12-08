@@ -16,6 +16,8 @@ namespace BookingApp
         List<Room> Rooms;
         public CheckRoomAvailability()
         {
+            Rooms = new List<Room>();
+            Bookings = new List<Booking>();
             Rooms = sg.Read();
             Bookings = bg.Read();
         }
