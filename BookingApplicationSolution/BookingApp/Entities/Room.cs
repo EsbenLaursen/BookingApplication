@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BookingApp.Entities
 {
@@ -11,7 +12,8 @@ namespace BookingApp.Entities
         public int Persons { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
-        public Booking Booking { get; set; }
+        public List<Booking> Booking { get; set; }
+        public List<TemporaryBooking> TemporaryBookings { get; set; }
 
     }
 }
