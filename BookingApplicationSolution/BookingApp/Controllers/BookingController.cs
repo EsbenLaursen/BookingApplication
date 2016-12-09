@@ -128,7 +128,7 @@ namespace BookingApp.Controllers
                 + " - " + email.EndDate.ToShortDateString() + "<br />"+ "<a href='https://www.youtube.com/watch?v=_GuOjXYl5ew'>Confirm booking</a>";
             efm.Subject = "new booking";     
 
-            
+
             var check = egw.SendMail(efm);
             if (check)
             {
