@@ -1,71 +1,90 @@
-﻿@{
+﻿@using BookingApp.Controllers
+
+@{
     ViewBag.Title = "Contact";
 }
 <h2>@ViewBag.Title.</h2>
-
+<link rel="stylesheet" href="../../Content/StylesheetContact.css">
 <body>
-<div class="row">
-    <div class="col-lg-4" style="padding-top: 3%">
-        <address>
-            <b>Name:</b> Sandvedhus Bed & Breakfast <br/>
-            <b>Address:</b> Helletvej 97, Rødding <br/>
-            <b>Phone:</b> 88 88 88 88 <br/>
-            <strong>Mail:</strong> <a href="mailto:ag-mam@live.dk">Husk at skifte mail</a><br/>
-        </address>
-    </div>
-    <div class="col-lg-8"style="padding-left: 15%">
-        <h1>Find us here!</h1>
-        <div id="map" style="width: 600px; height: 600px; background: yellow"></div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcoUs5DtNsHtRvVhaWX7HrvgAatmZv1ds"></script>
-        <script>
-            function initialize()
-            {
-                var helletvej = { lat: 55.369153, lng: 9.128892 };
-                var map = new google.maps.Map(document.getElementById('map'),
-                {
-                    zoom: 12,
-                    center: helletvej
-                });
+    <div class="row">
+        
 
-                // Add a marker at the center of the map.
-                addMarker(helletvej, map);
-            }
-            function addMarker(location, map) {
-                var marker = new google.maps.Marker(
-                {
-                    position: location,
-                    map: map
-                });
-                var contentString = '<div id="content">' +
-                    '<div id="siteNotice">' +
-                    '</div>' +
-                    '<h1 id="firstHeading" class="firstHeading">Information</h1>' +
-                    '<div id="bodyContent">' +
-                    '<p><b>Sanvedhus B&B</b> ' +
-                    '<p>Sandvedhus Bed & Breakfast</p> ' +
-                    '<p>Helletvej 1, 6630 Rødding</p> ' +
-                    '<p>Phone: 88 88 88 88</p> ' +
-                    '</p>' +
-                    '<p><b>Mail:</b> <a href="mailto:ag-mam@live.dk">' +
-                    'Send us an email!</a> ' +
-                    '</p>' +
-                    '<p><b>Route guide:</b> <a href="https://www.google.com/maps/dir/Current+Location/Helletvej+1+6630+Rødding"target="_blank">' +
-                    'Google Maps' +
-                    '</p>' +
-                    '</div>' +
-                    '</div>';
-
-                var infowindow = new google.maps.InfoWindow({
-                    content: contentString,
-                    maxWidth: 200
-                });
-                marker.addListener('click',
-                    function() {
-                        infowindow.open(map, marker);
+        <div class="col-lg-4" style="padding-top: 3%">
+            <address>
+                <b>Name:</b> Sandvedhus Bed & Breakfast <br />
+                <b>Address:</b> Helletvej 97, Rødding <br />
+                <b>Phone:</b> 88 88 88 88 <br />
+                <strong>Mail:</strong> <a href="mailto:ag-mam@live.dk">Husk at skifte mail</a><br />
+            </address>
+            <div id="wrap">
+                <div id='form_wrap'>
+                    @using (Html.BeginForm("SendEmail", "Home"))
+                    {
+                        <p>Contact us!</p>
+                        <label for="email">Message : </label>
+                        <textarea type="text" name="message" value="Your Message" id="message"></textarea>
+                        <label for="name">Name: </label>
+                        <input type="text" name="name" value="" id="name" />
+                        <label for="email">Email: </label>
+                        <input type="text" name="email" value="" id="email" />
+                        <input type="submit" value="Send!" class="btn btn-success" />
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-8" style="padding-left: 15%">
+            <h1>Find us here!</h1>
+            <div id="map" style="width: 600px; height: 600px;"></div>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcoUs5DtNsHtRvVhaWX7HrvgAatmZv1ds"></script>
+            <script>
+                function initialize() {
+                    var helletvej = { lat: 55.369153, lng: 9.128892 };
+                    var map = new google.maps.Map(document.getElementById('map'),
+                    {
+                        zoom: 12,
+                        center: helletvej
                     });
-            }
-            google.maps.event.addDomListener(window, 'load', initialize);
-        </script>
+
+                    // Add a marker at the center of the map.
+                    addMarker(helletvej, map);
+                }
+                function addMarker(location, map) {
+                    var marker = new google.maps.Marker(
+                    {
+                        position: location,
+                        map: map
+                    });
+                    var contentString = '<div id="content">' +
+                        '<div id="siteNotice">' +
+                        '</div>' +
+                        '<h1 id="firstHeading" class="firstHeading">Information</h1>' +
+                        '<div id="bodyContent">' +
+                        '<p><b>Sanvedhus B&B</b> ' +
+                        '<p>Sandvedhus Bed & Breakfast</p> ' +
+                        '<p>Helletvej 1, 6630 Rødding</p> ' +
+                        '<p>Phone: 88 88 88 88</p> ' +
+                        '</p>' +
+                        '<p><b>Mail:</b> <a href="mailto:ag-mam@live.dk">' +
+                        'Send us an email!</a> ' +
+                        '</p>' +
+                        '<p><b>Route guide:</b> <a href="https://www.google.com/maps/dir/Current+Location/Helletvej+1+6630+Rødding"target="_blank">' +
+                        'Google Maps' +
+                        '</p>' +
+                        '</div>' +
+                        '</div>';
+
+                    var infowindow = new google.maps.InfoWindow({
+                        content: contentString,
+                        maxWidth: 200
+                    });
+                    marker.addListener('click',
+                        function () {
+                            infowindow.open(map, marker);
+                        });
+                }
+                google.maps.event.addDomListener(window, 'load', initialize);
+            </script>
+        </div>
     </div>
-</div>
 </body>
