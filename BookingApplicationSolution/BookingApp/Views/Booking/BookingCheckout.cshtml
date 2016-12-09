@@ -4,6 +4,30 @@
     <link href="~/Content/checkoutstyle.css" rel="stylesheet" />
 </head>
 
+
+<div class="progress">
+    <div class="circle done">
+        <span class="label">1</span>
+        <span class="title">Dates</span>
+    </div>
+    <span class="bar done"></span>
+    <div class="circle done">
+        <span class="label">2</span>
+        <span class="title">Rooms</span>
+    </div>
+    <span class="bar done"></span>
+    <div class="circle done">
+        <span class="label">3</span>
+        <span class="title">Info</span>
+    </div>
+    <span class="bar done"></span>
+    <div class="circle active">
+        <span class="label">4</span>
+        <span class="title">Confirm</span>
+    </div>
+
+</div>
+
 @using (Html.BeginForm("SendEmail", "Booking"))
 {
 

@@ -240,6 +240,7 @@
     <Content Include="Content\StyleSheetImage.css" />
     <Content Include="Content\StylesheetIndexBooking.css" />
     <Content Include="Content\StylesheetPrice.css" />
+    <Content Include="Content\tableroomsavailable.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
