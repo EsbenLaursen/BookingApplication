@@ -6,37 +6,83 @@
 
 <head>
     @*<link rel="stylesheet" href="../../Content/StylesheetImage.css">*@
+    <script src="~/Content/IndexJS.js"></script>
 </head>
-<h2 class="text-center">Gallery</h2>
-<div>
-    <table class="table">
-        @for (int i = 0; i < Model.Images.Count;)
+
+<body>
+
+
+
+    <div class="container">
+        <h2 class="text-center">Gallery</h2>
+        <div>
+            <table class="table">
+                @for (int i = 0; i < Model.Images.Count;)
             {
-            <tr align="center" style="margin:10px">
-                <td>
-                    
-                    @for (int k = 0; k < 4; k++)
-                    {
-                        if (i < Model.Images.Count)
-                        {
+                    <tr align="center" style="margin: 10px">
+                        <td>
 
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                                <div class="hovereffect">
-                                    <img class="img-responsive" src="@Model.Images[i++].Path" style="max-height: 400px">
-                                    <div class="overlay">
+                            @for (int k = 0; k < 4; k++)
+                            {
+                                if (i < Model.Images.Count)
+                                {
+
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                        <div class="lightbox-gallery">
+                                            <div class="lightbox">
+                                                <img class="img-responsive" alt="//model.description" src="@Model.Images[i++].Path" style="max-height: 400px">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        }
-                    }
-                </td>
-            </tr>
-        }
-    </table>
-</div>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <script>
+    (function() {
+    var $lightbox = $("<div class='lightbox'></div>");
+    var $img = $("<img>");
+    var $caption = $("<p class='caption'></p>");
 
+    // Add image and caption to lightbox
 
+    $lightbox
+    .append($img)
+    .append($caption);
 
+    // Add lighbox to document
+
+    $('body').append($lightbox);
+
+    $('.lightbox-gallery img')
+    .click(function(e) {
+    e.preventDefault();
+
+    // Get image link and description
+    var src = $(this).attr("src");
+    var cap = $(this).attr("alt");
+
+    // Add data to lighbox
+
+    $img.attr('src', src);
+    $caption.text(cap);
+
+    // Show lightbox
+
+    $lightbox.fadeIn('fast');
+
+    $lightbox.click(function() {
+    $lightbox.fadeOut('fast');
+    });
+    });
+
+    }());
+    </script>
+</body>
 
 
 
@@ -57,43 +103,5 @@
     </div>
 
 
-        <script>
-            (function () {
-                var $lightbox = $("<div class='lightbox'></div>");
-                var $img = $("<img>");
-                var $caption = $("<p class='caption'></p>");
 
-                // Add image and caption to lightbox
-
-                $lightbox
-                    .append($img)
-                    .append($caption);
-
-                // Add lighbox to document
-
-                $('body').append($lightbox);
-
-                $('.lightbox-gallery img').click(function (e) {
-                    e.preventDefault();
-
-                    // Get image link and description
-                    var src = $(this).attr("src");
-                    var cap = $(this).attr("alt");
-
-                    // Add data to lighbox
-
-                    $img.attr('src', src);
-                    $caption.text(cap);
-
-                    // Show lightbox
-
-                    $lightbox.fadeIn('fast');
-
-                    $lightbox.click(function () {
-                        $lightbox.fadeOut('fast');
-                    });
-                });
-
-            }());
-        </script>
     </body>*@
