@@ -234,6 +234,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\checkoutstyle.css" />
+    <Content Include="Content\IndexJS.js" />
     <Content Include="Content\OurImages\trumpsta.jpg" />
     <Content Include="Content\StylesheetContact.css" />
     <Content Include="Content\StyleSheetCustomerInfo.css" />

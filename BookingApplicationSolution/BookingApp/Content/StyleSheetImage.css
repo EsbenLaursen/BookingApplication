@@ -1,19 +1,4 @@
-﻿body{
-	background-color: white;
-	
-}
-/*.container{
-	max-width: 400px;
-	margin: 5% auto;
-	padding: 20px;
-	background-color: #fff;
-	border-radius: 10px;
-	overflow: hidden;
-	box-sizing: border-box;
-	box-shadow: 0 0 5px #222;
-}*/
-
-.text-center{
+﻿.text-center{
 	text-align: center;
 	margin-bottom: 1em;
 }
@@ -26,9 +11,7 @@
 }
 
 .lightbox-gallery div > img {
-  /*max-width: 100%;*/
-    width: 150px;
-    height: 150px;
+  max-width: 100%;
   display: block;
 }
 
@@ -68,7 +51,6 @@
 .lightbox img{
 	display: block;
   margin: auto;
-    
 }
 
 .lightbox .caption{
