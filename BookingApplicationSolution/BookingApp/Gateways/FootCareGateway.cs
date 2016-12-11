@@ -29,7 +29,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = client.GetAsync("api/FootCares").Result;
+                HttpResponseMessage response = client.GetAsync("api/FootCares/GetFootCares").Result;
                 if (response.IsSuccessStatusCode)
                 { //JsonConvert.DeserializeObject<List<Booking>>(
                     return response.Content.ReadAsAsync<List<FootCare>>().Result;
@@ -47,7 +47,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.GetAsync("/api/FootCares/" + id).Result;
+                var response = client.GetAsync("/api/FootCares/GetFootCare/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
 

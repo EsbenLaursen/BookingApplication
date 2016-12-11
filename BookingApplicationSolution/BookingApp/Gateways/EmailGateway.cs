@@ -18,7 +18,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.PostAsJsonAsync("/api/email/", efm).Result;
+                var response = client.PostAsJsonAsync("/api/email/Contact", efm).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return true;

@@ -19,7 +19,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = client.PostAsJsonAsync("api/temporarybookings", t).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync("api/temporarybookings/PostTemporaryBooking", t).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return response.Content.ReadAsAsync<TemporaryBooking>().Result;
@@ -36,7 +36,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.DeleteAsync("/api/temporarybookings/" + id).Result;
+                var response = client.DeleteAsync("/api/temporarybookings/DeleteTemporaryBooking/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -54,7 +54,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = client.GetAsync("api/bookings").Result;
+                HttpResponseMessage response = client.GetAsync("api/bookings/GetTempBookings").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return response.Content.ReadAsAsync<List<TemporaryBooking>>().Result;
@@ -72,7 +72,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.GetAsync("/api/temporarybookings/" + id).Result;
+                var response = client.GetAsync("/api/temporarybookings/GetTemporaryBooking/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
 
@@ -91,7 +91,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.PutAsJsonAsync("api/temporarybookings/" + t.Id, t).Result;
+                var response = client.PutAsJsonAsync("api/temporarybookings/PutTemporaryBooking/" + t.Id, t).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return response.Content.ReadAsAsync<TemporaryBooking>().Result;

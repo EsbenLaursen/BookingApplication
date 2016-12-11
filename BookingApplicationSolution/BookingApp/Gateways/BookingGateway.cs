@@ -21,7 +21,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = client.PostAsJsonAsync("api/bookings", t).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync("api/bookings/PostBooking", t).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return response.Content.ReadAsAsync<Booking>().Result;
@@ -38,7 +38,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.DeleteAsync("/api/bookings/" + id).Result;
+                var response = client.DeleteAsync("/api/bookings/DeleteBooking/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return true;
@@ -56,7 +56,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = client.GetAsync("api/bookings").Result;
+                HttpResponseMessage response = client.GetAsync("api/bookings/GetBookings").Result;
                 if (response.IsSuccessStatusCode)
                 { 
                     return response.Content.ReadAsAsync<List<Booking>>().Result;
@@ -74,7 +74,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.GetAsync("/api/bookings/" + id).Result;
+                var response = client.GetAsync("/api/bookings/getbooking" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     
@@ -93,7 +93,7 @@ namespace BookingApp.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.PutAsJsonAsync("api/bookings/" + t.Id, t).Result;
+                var response = client.PutAsJsonAsync("api/bookings/PutBooking/" + t.Id, t).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return response.Content.ReadAsAsync<Booking>().Result;
