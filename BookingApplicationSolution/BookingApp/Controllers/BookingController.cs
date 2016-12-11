@@ -19,13 +19,15 @@ namespace BookingApp.Controllers
         IServiceGateway<Customer> cm = new DllFacade().GetCustomerGateway();
         IServiceGateway<Room> rm = new DllFacade().GetRoomGateway();
         IServiceGateway<TemporaryBooking> tm = new DllFacade().GetTempBookingGateway();
+        AvailableDates ad = new DllFacade().GetAvailableGateway();
         EmailGateway egw = new DllFacade().GetEmailGateway();
 
         // GET: Booking
         public ActionResult Index()
         {
             CheckRoomAvailability check = new CheckRoomAvailability();
-            List<DateTime> dates = check.FetchUnavailableDates2();
+            List<DateTime> dates = ad.GetAvailableDates();
+
             BookingIndexViewModel viewModel = new BookingIndexViewModel()
             {
                 Bookings = bg.Read(),
@@ -41,7 +43,7 @@ namespace BookingApp.Controllers
             CheckRoomAvailability check = new CheckRoomAvailability();
             RoomsAvailableViewModel ravm = new RoomsAvailableViewModel()
             {
-                Rooms = check.Check(from, to),
+                Rooms = ad.GetAvailableRooms(from, to),
                 To = to,
                 From = from
             };
