@@ -1,6 +1,6 @@
-﻿using BookingApp.Entities;
-using BookingApp.Gateways;
-using BookingApp.Models;
+﻿using DLL.Entities;
+using DLL.Gateways;
+using DLL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

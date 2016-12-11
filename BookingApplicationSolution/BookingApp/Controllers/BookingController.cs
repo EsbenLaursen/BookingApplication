@@ -1,12 +1,8 @@
-﻿using BookingApp.Entities;
-using BookingApp.Gateways;
-using BookingApp.Models;
-using CloudinaryDotNet;
+﻿using DLL.Entities;
+using DLL.Gateways;
+using DLL.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BookingApp.Controllers
