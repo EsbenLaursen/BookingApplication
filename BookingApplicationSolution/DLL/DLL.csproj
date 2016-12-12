@@ -65,6 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckRoomAvailability.cs" />
+    <Compile Include="DllFacade.cs" />
     <Compile Include="Entities\Booking.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\FootCare.cs" />

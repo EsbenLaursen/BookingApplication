@@ -54,7 +54,7 @@ namespace DLL.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = client.GetAsync("api/bookings/GetTempBookings").Result;
+                HttpResponseMessage response = client.GetAsync("api/temporarybookings/GetTempBookings").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return response.Content.ReadAsAsync<List<TemporaryBooking>>().Result;
