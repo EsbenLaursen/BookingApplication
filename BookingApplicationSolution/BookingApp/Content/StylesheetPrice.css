@@ -21,32 +21,6 @@
 	position: relative;
 }
 
-#pricing-table .plan:nth-child(1) {
-	-moz-border-radius: 0 0 10px 10px;
-	-webkit-border-radius: 0 0 10px 10px;
-	border-radius: 0 0 10px 10px;
-             
-}
-#pricing-table .plan:nth-child(2) {
-	-moz-border-radius: 0 0 10px 10px;
-	-webkit-border-radius: 0 0 10px 10px;
-	border-radius: 0 0 10px 10px;
-             
-}
-#pricing-table .plan:nth-child(3) {
-	-moz-border-radius: 0 0 10px 10px;
-	-webkit-border-radius: 0 0 10px 10px;
-	border-radius: 0 0 10px 10px;
-             
-}
-
-#pricing-table .plan:nth-child(4) {
-	-moz-border-radius: 0 0 10px 10px   ;
-	-webkit-border-radius: 0 0 10px 10px;
-	border-radius: 0 0 10px 10px;
-          
-}
-
 #pricing-table h3 {
 	font-size: 20px;
 	font-weight: normal;
@@ -60,28 +34,6 @@
 	background-image: -o-linear-gradient(#1E90FF, #00BFFF);
 	background-image: linear-gradient(#1E90FF, #00BFFF);
   
-}
-
-#pricing-table .plan:nth-child(1) h3 {
-	-moz-border-radius: 5px 0 0 0;
-	-webkit-border-radius: 5px 0 0 0;
-	border-radius: 10px 0 10px 10px;       
-}
-#pricing-table .plan:nth-child(2) h3 {
-	-moz-border-radius: 5px 0 0 0;
-	-webkit-border-radius: 5px 0 0 0;
-	border-radius: 0 0 10px 10px;       
-}
-#pricing-table .plan:nth-child(3) h3 {
-	-moz-border-radius: 5px 0 0 0;
-	-webkit-border-radius: 5px 0 0 0;
-	border-radius: 0 0 10px 10px;       
-}
-
-#pricing-table .plan:nth-child(4) h3 {
-	-moz-border-radius: 0 5px 0 0;
-	-webkit-border-radius: 0 5px 0 0;
-	border-radius: 0 10px 10px 10px;       
 }
 
 #pricing-table h3 span {
@@ -113,6 +65,7 @@
 	padding: 10px 10px 10px 10px;
    
 }
+
 
 .clear:before, .clear:after {
   content:"";
