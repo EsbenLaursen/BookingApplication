@@ -7,6 +7,7 @@ using BookingApp;
 using DLL.Entities;
 using DLL.Gateways;
 using DLL.Models;
+using DLL;
 
 
 namespace BookingAppAdmin.Controllers
