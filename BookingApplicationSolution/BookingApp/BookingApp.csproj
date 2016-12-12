@@ -195,37 +195,16 @@
     <Compile Include="CheckRoomAvailability.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="DllFacade.cs" />
-    <Compile Include="Entities\Booking.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Entities\FootCare.cs" />
-    <Compile Include="Entities\Image.cs" />
-    <Compile Include="Entities\TemporaryBooking.cs" />
-    <Compile Include="Gateways\BookingGateway.cs" />
-    <Compile Include="Gateways\CustomerGateway.cs" />
-    <Compile Include="Gateways\EmailGateway.cs" />
-    <Compile Include="Gateways\FootCareGateway.cs" />
-    <Compile Include="Gateways\ImageGateway.cs" />
-    <Compile Include="Gateways\IServiceGateway.cs" />
-    <Compile Include="Gateways\RoomGateway.cs" />
-    <Compile Include="Gateways\TemporaryBookingGateway.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BookingIndexViewModel.cs" />
-    <Compile Include="Models\CheckoutViewModel.cs" />
-    <Compile Include="Models\CustomerInfoViewModel.cs" />
-    <Compile Include="Models\EmailFormModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\PriceViewModel.cs" />
-    <Compile Include="Models\RoomsAvailableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\Room.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -344,6 +323,12 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Danish.Designer.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DLL\DLL.csproj">
+      <Project>{B9139543-3CDA-415A-9B75-DC278A57BB7E}</Project>
+      <Name>DLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
