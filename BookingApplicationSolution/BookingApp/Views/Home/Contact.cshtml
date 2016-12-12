@@ -7,15 +7,17 @@
 <link rel="stylesheet" href="../../Content/StylesheetContact.css">
 <body>
     <div class="row">
-        
+
 
         <div class="col-lg-4" style="padding-top: 3%">
-            <address>
-                <b>Name:</b> Sandvedhus Bed & Breakfast <br />
-                <b>Address:</b> Helletvej 97, Rødding <br />
-                <b>Phone:</b> 88 88 88 88 <br />
-                <strong>Mail:</strong> <a href="mailto:ag-mam@live.dk">Husk at skifte mail</a><br />
-            </address>
+            <div class="border">
+                <address>
+                    <b>Name:</b> Sandvedhus Bed & Breakfast <br />
+                    <b>Address:</b> Helletvej 1, Rødding <br />
+                    <b>Phone:</b> 88 88 88 88 <br />
+                    <strong>Mail:</strong> <a href="mailto:ag-mam@live.dk">Husk at skifte mail</a><br />
+                </address>
+            </div>
             <div id="wrap">
                 <div id='form_wrap'>
                     @using (Html.BeginForm("SendEmail", "Home"))
@@ -24,10 +26,10 @@
                         <label for="email">Message : </label>
                         <textarea type="text" name="message" value="Your Message" id="message"></textarea>
                         <label for="name">Name: </label>
-                        <input type="text" name="name" value="" id="name" />
+                        <input type="text" name="name" value="" id="name"/>
                         <label for="email">Email: </label>
-                        <input type="text" name="email" value="" id="email" />
-                        <input type="submit" value="Send!" class="btn btn-success" />
+                        <input type="text" name="email" value="" id="email"/>
+                        <input type="submit" value="Send!" class="btn btn-success"/>
                     }
                 </div>
             </div>
