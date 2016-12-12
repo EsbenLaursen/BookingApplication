@@ -1,12 +1,8 @@
-﻿using BookingApp.Entities;
-using BookingApp.Gateways;
-using BookingApp.Models;
-using CloudinaryDotNet;
+﻿using DLL.Entities;
+using DLL.Gateways;
+using DLL.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BookingApp.Controllers
@@ -19,13 +15,15 @@ namespace BookingApp.Controllers
         IServiceGateway<Customer> cm = new DllFacade().GetCustomerGateway();
         IServiceGateway<Room> rm = new DllFacade().GetRoomGateway();
         IServiceGateway<TemporaryBooking> tm = new DllFacade().GetTempBookingGateway();
+        AvailableDates ad = new DllFacade().GetAvailableGateway();
         EmailGateway egw = new DllFacade().GetEmailGateway();
 
         // GET: Booking
         public ActionResult Index()
         {
             CheckRoomAvailability check = new CheckRoomAvailability();
-            List<DateTime> dates = check.FetchUnavailableDates2();
+            List<DateTime> dates = ad.GetAvailableDates();
+
             BookingIndexViewModel viewModel = new BookingIndexViewModel()
             {
                 Bookings = bg.Read(),
@@ -41,7 +39,7 @@ namespace BookingApp.Controllers
             CheckRoomAvailability check = new CheckRoomAvailability();
             RoomsAvailableViewModel ravm = new RoomsAvailableViewModel()
             {
-                Rooms = check.Check(from, to),
+                Rooms = ad.GetAvailableRooms(from, to),
                 To = to,
                 From = from
             };
@@ -125,10 +123,10 @@ namespace BookingApp.Controllers
             efm.FromName = email.CustomerFirstname + " " + email.CustomerLastname;
             efm.FromEmail = email.CustomerEmail;
             efm.Message = "Dates: " + email.StartDate.ToShortDateString()
-                + " - " + email.EndDate.ToShortDateString() + "<br />"+ "<a href='https://www.youtube.com/watch?v=_GuOjXYl5ew'>Confirm booking</a>";
+                + " - " + email.EndDate.ToShortDateString() + "<br />"+ "<a href='http://localhost:58771/'>Confirm booking</a>";
             efm.Subject = "new booking";     
 
-            
+
             var check = egw.SendMail(efm);
             if (check)
             {
