@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace BookingApp.Models
+namespace DLL.Models
 {
     public class IndexViewModel
     {

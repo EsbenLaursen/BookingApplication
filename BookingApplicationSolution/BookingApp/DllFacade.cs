@@ -1,5 +1,5 @@
-﻿using BookingApp.Entities;
-using BookingApp.Gateways;
+﻿using DLL.Entities;
+using DLL.Gateways;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +27,12 @@ namespace BookingApp
         {
             return new FootCareGateway();
         }
+
+        public AvailableDates GetAvailableGateway()
+        {
+            return new AvailableDates();
+        }
+
         public IServiceGateway<Room> GetRoomGateway()
         {
             return new RoomGateway();
