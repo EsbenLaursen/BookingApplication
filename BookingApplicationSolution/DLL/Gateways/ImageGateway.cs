@@ -4,22 +4,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Web;
+using CloudinaryDotNet;
 
 namespace DLL.Gateways
 {
     public class ImageGateway : IServiceGateway<Image>
     {
+       
         public Image Create(Image t)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.PostAsJsonAsync("api/images/PostImage", t).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadAsAsync<Image>().Result;
+                }
+                return null;
+            }
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
-        }
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                var response = client.DeleteAsync("/api/Images/DeleteImage/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
         public List<Image> Read()
         {
             using (var client = new HttpClient())
@@ -60,7 +87,20 @@ namespace DLL.Gateways
 
         public Image Update(Image t)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = client.PutAsJsonAsync("api/Images/PutImage/" + t.ImageId, t).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadAsAsync<Image>().Result;
+                }
+            }
+            return new Image();
         }
     }
 }

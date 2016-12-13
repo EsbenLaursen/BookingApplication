@@ -69,32 +69,12 @@ namespace BookingAppAdmin.Controllers
             }
         }
 
-        // GET: Booking/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Booking/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
 
         // GET: Booking/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(bg.Read(id));
         }
 
         // POST: Booking/Delete/5
@@ -103,7 +83,7 @@ namespace BookingAppAdmin.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                bg.Delete(id);
 
                 return RedirectToAction("Index");
             }

@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+}
+
+<h2>Upload images</h2>
+<div id='backend_upload'>
+ 
+
+    @using (Html.BeginForm("UploadServer", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input id="fileupload" type="file" name="files" multiple accept="image/gif, image/jpeg, image/png">
+        <input type="submit" value="Upload">    
+    }
+</div>
+
+<a href="~/Image/Index" class="back_link">Back to list...</a>
+

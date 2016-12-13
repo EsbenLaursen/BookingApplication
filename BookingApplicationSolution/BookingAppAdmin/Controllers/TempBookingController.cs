@@ -14,7 +14,6 @@ namespace BookingAppAdmin.Controllers
 
         IServiceGateway<Booking> bg = new DllFacade().GetBookingGateway();
         IServiceGateway<Customer> cm = new DllFacade().GetCustomerGateway();
-        IServiceGateway<Room> rm = new DllFacade().GetRoomGateway();
         private IServiceGateway<TemporaryBooking> tb = new DllFacade().GetTempBookingGateway();
         // GET: TempBooking
         public ActionResult Index()

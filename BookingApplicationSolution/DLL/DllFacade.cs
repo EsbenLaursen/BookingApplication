@@ -9,7 +9,10 @@ namespace DLL
 {
     public class DllFacade
     {
-
+        public CloudGateway GetCloudGateway()
+        {
+            return new CloudGateway();
+        }
         public EmailGateway GetEmailGateway()
         {
             return new EmailGateway();

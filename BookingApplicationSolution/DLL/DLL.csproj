@@ -75,6 +75,7 @@
     <Compile Include="Entities\TemporaryBooking.cs" />
     <Compile Include="Gateways\AvailableDates.cs" />
     <Compile Include="Gateways\BookingGateway.cs" />
+    <Compile Include="Gateways\CloudGateway.cs" />
     <Compile Include="Gateways\CustomerGateway.cs" />
     <Compile Include="Gateways\EmailGateway.cs" />
     <Compile Include="Gateways\FootCareGateway.cs" />

@@ -12,14 +12,38 @@ namespace DLL.Gateways
     {
         public Room Create(Room t)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.PostAsJsonAsync("api/rooms/PostRoom", t).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadAsAsync<Room>().Result;
+                }
+                return null;
+            }
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
-        }
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                var response = client.DeleteAsync("/api/rooms/DeleteRoom/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
         public List<Room> Read()
         {
             using (var client = new HttpClient())
@@ -59,7 +83,20 @@ namespace DLL.Gateways
 
         public Room Update(Room t)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = client.PutAsJsonAsync("api/rooms/PutRoom/" + t.Id, t).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadAsAsync<Room>().Result;
+                }
+            }
+            return new Room();
         }
     }
 }
