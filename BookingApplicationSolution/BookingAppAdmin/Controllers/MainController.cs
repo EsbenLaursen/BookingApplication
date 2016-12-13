@@ -29,7 +29,7 @@ namespace BookingAppAdmin.Controllers
         {
             if (username == "mor" && password == "lol123")
             {
-                FormsAuthentication.SetAuthCookie(username, false);
+         
                 return View("Index");
             }
             else

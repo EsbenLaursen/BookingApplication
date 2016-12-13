@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace BookingAppAdmin.Controllers
 {
+    [Authorize]
     public class FootCareController : Controller
     {
         IServiceGateway<FootCare> fg = new DllFacade().GetSFootCareGateway();
