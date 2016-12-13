@@ -1,5 +1,6 @@
 ﻿using DLL.Entities;
 using DLL.Gateways;
+using DLL;
 using DLL.Models;
 using System;
 using System.Collections.Generic;

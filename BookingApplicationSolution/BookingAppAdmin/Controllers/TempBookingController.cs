@@ -1,11 +1,11 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BookingApp;
 using DLL.Entities;
 using DLL.Gateways;
+using DLL;
 
 namespace BookingAppAdmin.Controllers
 {
@@ -26,7 +26,7 @@ namespace BookingAppAdmin.Controllers
         // GET: TempBooking/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(tb.Read(id));
         }
 
         // GET: TempBooking/Create
@@ -69,32 +69,12 @@ namespace BookingAppAdmin.Controllers
             }
         }
 
-        // GET: TempBooking/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: TempBooking/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+        
         // GET: TempBooking/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            
+            return View(tb.Read(id));
         }
 
         // POST: TempBooking/Delete/5
@@ -103,7 +83,7 @@ namespace BookingAppAdmin.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                tb.Delete(id);
 
                 return RedirectToAction("Index");
             }

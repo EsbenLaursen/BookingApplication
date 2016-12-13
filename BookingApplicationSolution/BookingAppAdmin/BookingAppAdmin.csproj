@@ -148,7 +148,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\FootCareController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\TempBookingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -215,6 +217,19 @@
     <Content Include="Views\Booking\Details.cshtml" />
     <Content Include="Views\TempBooking\Index.cshtml" />
     <Content Include="Views\TempBooking\Create.cshtml" />
+    <Content Include="Views\FootCare\Index.cshtml" />
+    <Content Include="Views\FootCare\Details.cshtml" />
+    <Content Include="Views\FootCare\Create.cshtml" />
+    <Content Include="Views\FootCare\Edit.cshtml" />
+    <Content Include="Views\FootCare\Delete.cshtml" />
+    <Content Include="Views\Main\LogOn.cshtml" />
+    <Content Include="Views\TempBooking\Delete.cshtml" />
+    <Content Include="Views\TempBooking\Details.cshtml" />
+    <Content Include="Views\Room\Index.cshtml" />
+    <Content Include="Views\Room\Details.cshtml" />
+    <Content Include="Views\Room\Create.cshtml" />
+    <Content Include="Views\Room\Edit.cshtml" />
+    <Content Include="Views\Room\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
