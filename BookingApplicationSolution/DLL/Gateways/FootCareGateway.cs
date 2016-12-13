@@ -12,12 +12,37 @@ namespace DLL.Gateways
     {
         public FootCare Create(FootCare t)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.PostAsJsonAsync("api/footcares/PostFootcare", t).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadAsAsync<FootCare>().Result;
+                }
+                return null;
+            }
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = client.DeleteAsync("/api/Footcares/DeleteFootcare/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
         }
 
         public List<FootCare> Read()
@@ -47,7 +72,7 @@ namespace DLL.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.GetAsync("/api/FootCares/GetFootCare/" + id).Result;
+                var response = client.GetAsync("/api/footcares/GetFootCare/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
 
@@ -59,7 +84,20 @@ namespace DLL.Gateways
 
         public FootCare Update(FootCare t)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = client.PutAsJsonAsync("api/footcares/PutFootCare/" + t.Id, t).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadAsAsync<FootCare>().Result;
+                }
+            }
+            return new FootCare();
         }
     }
 }

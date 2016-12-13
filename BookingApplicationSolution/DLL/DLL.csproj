@@ -82,6 +82,7 @@
     <Compile Include="Gateways\IServiceGateway.cs" />
     <Compile Include="Gateways\RoomGateway.cs" />
     <Compile Include="Gateways\TemporaryBookingGateway.cs" />
+    <Compile Include="Models\AdminPriceModel.cs" />
     <Compile Include="Models\BookingIndexViewModel.cs" />
     <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\CustomerInfoViewModel.cs" />
