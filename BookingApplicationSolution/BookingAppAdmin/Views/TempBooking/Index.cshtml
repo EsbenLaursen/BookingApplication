@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<DLL.Entities.TemporaryBooking>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pending Bookings";
 }
 
-<h2>Index</h2>
+<h2>List of pending Bookings</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -53,8 +50,7 @@
             @Html.DisplayFor(modelItem => item.CustomerPhoneNr)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Create", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

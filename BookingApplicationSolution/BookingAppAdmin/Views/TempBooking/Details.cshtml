@@ -1,13 +1,14 @@
 ﻿@model DLL.Entities.TemporaryBooking
 
 @{
-    ViewBag.Title = "Confirm";
+    ViewBag.Title = "Details";
 }
 
-<h3>Confirm pending booking</h3>
+<h2>Details</h2>
 
 <div>
-  <hr />
+    <h4>TemporaryBooking</h4>
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.StartDate)
@@ -58,29 +59,7 @@
         </dd>
 
     </dl>
-    <h5>Rooms</h5>
-    @foreach (var r in Model.Rooms)
-    {
-        
-        <p>@r.Name</p>
-        <br />
-    }
 </div>
-@using (Html.BeginForm("Accept", "TempBooking", FormMethod.Post))
-{
-    <input type="hidden" name="id" value="@Model.Id"/>
-    <input type="submit" class="btn btn-success"value="Confirm"/>
-}
-<br/>
-
-@using (Html.BeginForm("Delete", "TempBooking", FormMethod.Post))
-{
-    <input type="hidden" name="id" value="@Model.Id" />
-    <input type="submit" class="btn btn-success" value="Decline" />
-}
-
-
 <p>
- 
     @Html.ActionLink("Back to List", "Index")
 </p>
