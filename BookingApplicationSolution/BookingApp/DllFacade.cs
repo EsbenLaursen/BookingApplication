@@ -45,5 +45,10 @@ namespace BookingApp
         {
             return new ImageGateway();
         }
+
+        public IServiceGateway<Review> GetReviewGateway()
+        {
+            return new ReviewGateway();
+        }
     }
 }

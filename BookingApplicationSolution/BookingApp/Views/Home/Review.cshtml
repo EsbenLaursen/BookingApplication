@@ -1,8 +1,53 @@
-﻿
-
+﻿@model DLL.Models.ReviewModel
+<head>
+    <link rel="stylesheet" href="../../Content/StylesheetReview.css">
+</head>
 @{
     ViewBag.Title = "title";
-   
- }
 
-<h2>User reviews</h2>
+ }
+<br/>
+<h2>Submit your review!</h2>
+<br/>
+@using (Html.BeginForm("Review", "Home"))
+{
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="half left cf">
+                <input type="text" name="name" id="input-name" placeholder="Name">
+            </div>
+            <div class="half right cf">
+                <textarea name="message" type="text" id="input-message" placeholder="Message"></textarea>
+            </div>
+            <input type="submit" value="Submit" class="btn btn-success" id="input-submit">
+
+        </div>
+    </div>
+}
+
+
+<div class="row">
+    @foreach (var item in @Model.review)
+    {
+        <div class="col-lg-4">
+            <div class=amazing-reviews>
+                <blockquote>
+                    <header>
+                        <span data-rating=5>
+                            @for (int i = 0; i < item.Rating; i++)
+                            {
+                                <a href="#"i+1 title=@Html.DisplayFor(modelItem => item.Rating)>★</a>
+                            }
+                           
+                            
+                        </span>
+                        <b>@Html.DisplayFor(modelItem => item.Name)</b>
+                    </header>
+                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                </blockquote>
+            </div>
+        </div>
+        }
+    
+</div>
+

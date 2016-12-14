@@ -69,6 +69,7 @@
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\FootCare.cs" />
     <Compile Include="Entities\Image.cs" />
+    <Compile Include="Entities\Review.cs" />
     <Compile Include="Entities\Room.cs" />
     <Compile Include="Entities\TemporaryBooking.cs" />
     <Compile Include="Gateways\AvailableDates.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Gateways\FootCareGateway.cs" />
     <Compile Include="Gateways\ImageGateway.cs" />
     <Compile Include="Gateways\IServiceGateway.cs" />
+    <Compile Include="Gateways\ReviewGateway.cs" />
     <Compile Include="Gateways\RoomGateway.cs" />
     <Compile Include="Gateways\TemporaryBookingGateway.cs" />
     <Compile Include="Models\BookingIndexViewModel.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Models\EmailFormModel.cs" />
     <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\PriceViewModel.cs" />
+    <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\RoomsAvailableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
