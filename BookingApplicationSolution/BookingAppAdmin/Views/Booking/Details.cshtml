@@ -1,0 +1,49 @@
+﻿@model DLL.Entities.Booking
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        
+    </dl>
+</div>
+<p>
+  
+    @Html.ActionLink("Back to List", "Index")
+</p>

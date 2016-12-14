@@ -1,0 +1,86 @@
+﻿@model DLL.Entities.TemporaryBooking
+
+@{
+    ViewBag.Title = "Confirm";
+}
+
+<h3>Confirm pending booking</h3>
+
+<div>
+  <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerFirstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerFirstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerLastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerLastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerPhoneNr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerPhoneNr)
+        </dd>
+
+    </dl>
+    <h5>Rooms</h5>
+    @foreach (var r in Model.Rooms)
+    {
+        
+        <p>@r.Name</p>
+        <br />
+    }
+</div>
+@using (Html.BeginForm("Accept", "TempBooking", FormMethod.Post))
+{
+    <input type="hidden" name="id" value="@Model.Id"/>
+    <input type="submit" class="btn btn-success"value="Confirm"/>
+}
+<br/>
+
+@using (Html.BeginForm("Delete", "TempBooking", FormMethod.Post))
+{
+    <input type="hidden" name="id" value="@Model.Id" />
+    <input type="submit" class="btn btn-success" value="Decline" />
+}
+
+
+<p>
+ 
+    @Html.ActionLink("Back to List", "Index")
+</p>

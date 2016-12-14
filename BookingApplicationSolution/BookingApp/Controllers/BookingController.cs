@@ -1,5 +1,6 @@
 ﻿using DLL.Entities;
 using DLL.Gateways;
+using DLL;
 using DLL.Models;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace BookingApp.Controllers
         // GET: Booking
         public ActionResult Index()
         {
-            CheckRoomAvailability check = new CheckRoomAvailability();
+            
             List<DateTime> dates = ad.GetAvailableDates();
 
             BookingIndexViewModel viewModel = new BookingIndexViewModel()
@@ -33,48 +34,53 @@ namespace BookingApp.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
-        public ActionResult RoomsAvailable(DateTime from, DateTime to)
+       
+        public ActionResult RoomsAvailable(DateTime ?from, DateTime ?to)
         {
+            if (from != null || to != null)
+            {
+            
             CheckRoomAvailability check = new CheckRoomAvailability();
             RoomsAvailableViewModel ravm = new RoomsAvailableViewModel()
             {
-                Rooms = ad.GetAvailableRooms(from, to),
-                To = to,
-                From = from
+                Rooms = ad.GetAvailableRooms(from.Value, to.Value),
+                To = to.Value,
+                From = from.Value
             };
-
-
-            //Test
-            List<DateTime> dates = check.FetchUnavailableDates2();
-
-
             return View(ravm);
+        }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult GetRooms(int[] ids, DateTime to, DateTime from)
         {
-            if (ids.Length == 0)
+            if (from != null || to != null)
             {
-                return RedirectToAction("RoomsAvailable");
-            }
-            List<Room> rooms = new List<Room>();
+                if (ids ==null || ids.Length == 0)
+                {
+                    return RedirectToAction("RoomsAvailable", new {to = to, from =from});
+                }
+                List<Room> rooms = new List<Room>();
 
-            foreach (var i in ids)
-            {
-                rooms.Add(rm.Read(i));
-            }
-            Session["Rooms"] = rooms;
-            Session["to"] = to;
-            Session["from"] = from;
+                foreach (var i in ids)
+                {
+                    rooms.Add(rm.Read(i));
+                }
+                Session["Rooms"] = rooms;
+                Session["to"] = to;
+                Session["from"] = from;
 
-            return RedirectToAction("CustomerInformation", FormMethod.Get);
+                return RedirectToAction("CustomerInformation", FormMethod.Get);
+            }
+            return RedirectToAction("Index");
         }
 
         public ActionResult CustomerInformation()
         {
-            return View();
+            if (Session["to"] !=null || Session["from"] != null)
+                return View();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -88,15 +94,13 @@ namespace BookingApp.Controllers
             return View(c);
         }
 
-
-
-
         [HttpGet]
         public ActionResult BookingCheckout()
-
         {
 
-            var c = Session["customer"] as Customer;
+            if (Session["to"] != null || Session["from"] != null || Session["customer"]!= null || Session["Rooms"] !=null)
+            {
+                 var c = Session["customer"] as Customer;
 
             var vm = new CheckoutViewModel();
             vm.TemporaryBooking = new TemporaryBooking()
@@ -112,12 +116,17 @@ namespace BookingApp.Controllers
             };
             Session["temp"] = vm.TemporaryBooking;
             return View(vm);
+            }
+            return RedirectToAction("Index");
+
         }
 
         [HttpPost]
         public ActionResult SendEmail( )
-        { 
-            var email = Session["temp"] as TemporaryBooking;
+        {
+            if (Session["temp"] != null)
+            {
+                 var email = Session["temp"] as TemporaryBooking;
             EmailFormModel efm = new EmailFormModel();
 
             efm.FromName = email.CustomerFirstname + " " + email.CustomerLastname;
@@ -137,6 +146,8 @@ namespace BookingApp.Controllers
                 return new HttpNotFoundResult("Could not send email");
             }
             return View();
+            }
+           return new HttpStatusCodeResult(409,"Session is not available, you have to start over");
         }
 
 

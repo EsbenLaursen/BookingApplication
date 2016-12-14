@@ -65,6 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckRoomAvailability.cs" />
+    <Compile Include="DllFacade.cs" />
     <Compile Include="Entities\Booking.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\FootCare.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Entities\TemporaryBooking.cs" />
     <Compile Include="Gateways\AvailableDates.cs" />
     <Compile Include="Gateways\BookingGateway.cs" />
+    <Compile Include="Gateways\CloudGateway.cs" />
     <Compile Include="Gateways\CustomerGateway.cs" />
     <Compile Include="Gateways\EmailGateway.cs" />
     <Compile Include="Gateways\FootCareGateway.cs" />
@@ -82,6 +85,7 @@
     <Compile Include="Gateways\ReviewGateway.cs" />
     <Compile Include="Gateways\RoomGateway.cs" />
     <Compile Include="Gateways\TemporaryBookingGateway.cs" />
+    <Compile Include="Models\AdminPriceModel.cs" />
     <Compile Include="Models\BookingIndexViewModel.cs" />
     <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\CustomerInfoViewModel.cs" />

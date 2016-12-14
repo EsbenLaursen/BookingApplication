@@ -1,0 +1,122 @@
+﻿@model DLL.Models.CustomerInfoViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<head>
+    
+    <link href="~/Content/tableroomsavailable.css" rel="stylesheet" />
+</head>
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>CustomerInfoViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-sm-5">
+                @Html.Label("First name", new { style = "width: 100px" })
+                @Html.EditorFor(model => model.Customer.FirstName)
+                @Html.ValidationMessageFor(model => model.Customer.FirstName, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-5">
+                @Html.Label("Last name", new { style = "width: 100px" })
+                @Html.EditorFor(model => model.Customer.LastName)
+                @Html.ValidationMessageFor(model => model.Customer.LastName, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-5">
+                @Html.Label("Email", new { style = "width: 100px" })
+                @Html.EditorFor(model => model.Customer.Email)
+                @Html.ValidationMessageFor(model => model.Customer.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-5">
+                @Html.Label("Telephone Nr", new { style = "width: 100px" })
+                @Html.EditorFor(model => model.Customer.Telephone)
+                @Html.ValidationMessageFor(model => model.Customer.Telephone, "", new { @class = "text-danger" })
+            </div>
+            
+            <div class="col-sm-5">
+                @Html.Label("Start date", new { style = "width: 100px" })
+                <input type="date" name="from" />
+                @Html.ValidationMessageFor(model => model.Booking.StartDate, "", new { @class = "text-danger" })
+            </div>
+            
+            <div class="col-sm-5">
+                @Html.Label("End date", new { style = "width: 100px" })
+                <input type="date" name="to"/>
+                @Html.ValidationMessageFor(model => model.Booking.EndDate, "", new { @class = "text-danger" })
+            </div>
+            
+
+            <h3>Rooms</h3>
+            <div class="container">
+                <div class="row">
+                    <section class="content">
+                   
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="table-container">
+                                        <table class="table table-filter">
+                                            <tbody>
+                                                @foreach (var r in Model.Rooms)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <div class="ckbox">
+                                                                <input type="checkbox" name="ids" value="@r.Id">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div>
+                                                                <div class="pull-left">
+                                                                    <img src="http://www.dangleterre.com/uploads/images/PanelImages/General/test_room.jpg" style="height: 160px; width: 240px">
+                                                                </div>
+
+                                                            </div>
+
+                                                        </td>
+                                                        <td>
+                                                            <div>
+                                                                <h4 class="title">
+                                                                    @r.Name
+                                                                </h4>
+                                                                <p class="summary">@r.Description</p>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create Booking" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
