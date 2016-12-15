@@ -9,7 +9,7 @@ using DLL.Entities;
 
 namespace DLL.Gateways
 {
-    public class ReviewGateway : IServiceGateway<Review>
+    public class ReviewGateway 
     {
         public List<Review> Read()
         {
@@ -31,17 +31,55 @@ namespace DLL.Gateways
 
         public Review Update(Review t)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = client.PutAsJsonAsync("api/Reviews/PutReview/" + t.Id, t).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadAsAsync<Review>().Result;
+                }
+            }
+            return new Review();
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var response = client.DeleteAsync("/api/Reviews/DeleteReview/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
         }
 
         public Review Create(Review t)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.PostAsJsonAsync("api/Reviews/PostReview", t).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadAsAsync<Review>().Result;
+                }
+                return null;
+            }
         }
 
         public Review Read(int id)
