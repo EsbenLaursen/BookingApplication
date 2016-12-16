@@ -9,6 +9,7 @@ using DLL;
 
 namespace BookingAppAdmin.Controllers
 {
+    [Authorize]
     public class TempBookingController : Controller
     {
 
