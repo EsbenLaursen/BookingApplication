@@ -17,7 +17,7 @@ namespace BookingApp.Controllers
         IServiceGateway<Booking> bg = new DllFacade().GetBookingGateway();
         private IServiceGateway<FootCare> fc = new DllFacade().GetSFootCareGateway();
         private IServiceGateway<Room> rm = new DllFacade().GetRoomGateway();
-        private IServiceGateway<Review> re = new DllFacade().GetReviewGateway();
+        private ReviewGateway rg = new DllFacade().GetReviewGateway();
 
         public ActionResult Index()
         {
@@ -42,9 +42,9 @@ namespace BookingApp.Controllers
         {
             var rm = new ReviewModel()
             {
-                review = re.Read()
+                review = rg.Read()
+            
             };
-            rm.Rating = 5;
             return View(rm);
         }
 
@@ -96,11 +96,18 @@ namespace BookingApp.Controllers
         [HttpPost]
         public ActionResult Review(string name, string message)
         {
-            ReviewGateway ef = new ReviewGateway();
+            if (name != null || message != null)
+            {
+               var r = new Review()
+               {
+                  Name = name,
+                  Description = message
+            };
+                rg.Create(r);
 
-            var rmodel = new ReviewModel();
-            rmodel.Rating = 5;
-            return View(rmodel);
+
+            }
+            return RedirectToAction("Review");
         }
     }
 }

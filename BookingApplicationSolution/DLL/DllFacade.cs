@@ -49,7 +49,7 @@ namespace DLL
             return new ImageGateway();
         }
 
-        public IServiceGateway<Review> GetReviewGateway()
+        public ReviewGateway GetReviewGateway()
         {
             return new ReviewGateway();
         }
