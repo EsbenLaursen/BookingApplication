@@ -15,11 +15,10 @@ namespace DLL.Gateways
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:52218/");
-
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = client.PostAsJsonAsync("api/api/Customers/PostCustomer", t).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync("api/Customers/PostCustomer", t).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return response.Content.ReadAsAsync<Customer>().Result;

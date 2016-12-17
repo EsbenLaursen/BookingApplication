@@ -38,9 +38,7 @@ namespace BookingApp.Controllers
         public ActionResult RoomsAvailable(DateTime ?from, DateTime ?to)
         {
             if (from != null || to != null)
-            {
-            
-            CheckRoomAvailability check = new CheckRoomAvailability();
+            { 
             RoomsAvailableViewModel ravm = new RoomsAvailableViewModel()
             {
                 Rooms = ad.GetAvailableRooms(from.Value, to.Value),
