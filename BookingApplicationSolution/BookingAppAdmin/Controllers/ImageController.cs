@@ -14,7 +14,7 @@ using Image = DLL.Entities.Image;
 
 namespace BookingAppAdmin.Controllers
 {
-
+    [Authorize]
     public class ImageController : Controller
     {
         static Cloudinary m_cloudinary;

@@ -48,5 +48,10 @@ namespace DLL
         {
             return new ImageGateway();
         }
+
+        public ReviewGateway GetReviewGateway()
+        {
+            return new ReviewGateway();
+        }
     }
 }

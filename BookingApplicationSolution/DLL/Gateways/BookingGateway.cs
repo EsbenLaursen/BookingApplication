@@ -74,7 +74,7 @@ namespace DLL.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.GetAsync("/api/bookings/getbooking" + id).Result;
+                var response = client.GetAsync("/api/bookings/GetBooking/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     

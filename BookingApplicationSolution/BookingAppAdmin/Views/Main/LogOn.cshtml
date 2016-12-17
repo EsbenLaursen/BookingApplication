@@ -8,7 +8,7 @@
         @Html.AntiForgeryToken()
         <input type="text" name="username" placeholder="Username">
         <input type="password" name="password" placeholder="Password">
-        @*<input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />*@
+        <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
                 <input type="submit" name="login" class="login loginmodal-submit" value="Login">
     }
 </div>

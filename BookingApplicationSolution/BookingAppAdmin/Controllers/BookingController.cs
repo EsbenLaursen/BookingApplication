@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BookingApp;
 using DLL.Entities;
 using DLL.Gateways;
 using DLL.Models;
@@ -12,7 +11,7 @@ using DLL;
 
 namespace BookingAppAdmin.Controllers
 {
-    
+    [Authorize]
     public class BookingController : Controller
     {
         IServiceGateway<Booking> bg = new DllFacade().GetBookingGateway();
@@ -28,7 +27,13 @@ namespace BookingAppAdmin.Controllers
         // GET: Booking/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var book = bg.Read(id);
+            if (book != null)
+            {
+                return View(book);
+            }
+
+            return RedirectToAction("Index");
         }
 
         // GET: Booking/Create
@@ -54,7 +59,7 @@ namespace BookingAppAdmin.Controllers
                 foreach (var i in ids)
                 {
                     rooms.Add(rm.Read(i));
-                    
+
                 }
                 booking.StartDate = from;
                 booking.EndDate = to;
@@ -69,12 +74,18 @@ namespace BookingAppAdmin.Controllers
             }
         }
 
-        
+
 
         // GET: Booking/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(bg.Read(id));
+            var book = bg.Read(id);
+            if (book != null)
+            {
+                return View(book);
+            }
+
+            return RedirectToAction("Index");
         }
 
         // POST: Booking/Delete/5

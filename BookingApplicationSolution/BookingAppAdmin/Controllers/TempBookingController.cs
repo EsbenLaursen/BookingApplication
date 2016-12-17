@@ -9,6 +9,7 @@ using DLL;
 
 namespace BookingAppAdmin.Controllers
 {
+    [Authorize]
     public class TempBookingController : Controller
     {
 
@@ -19,7 +20,7 @@ namespace BookingAppAdmin.Controllers
         public ActionResult Index()
         {
             var v = tb.Read().ToList();
-            return View(tb.Read().ToList());
+            return View(v);
         }
 
         // GET: TempBooking/Details/5

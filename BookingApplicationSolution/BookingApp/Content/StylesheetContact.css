@@ -1,16 +1,7 @@
-﻿@font-face {
-	font-family: 'YanoneKaffeesatzRegular';
-	src: url('http://pehaa.com/wp-content/uploads/2011/07/contactform/yanonekaffeesatz-regular-webfont.eot');
-	src: url('http://pehaa.com/wp-content/uploads/2011/07/contactform/yanonekaffeesatz-regular-webfont.eot?#iefix') format('embedded-opentype'),
-	url('http://pehaa.com/wp-content/uploads/2011/07/contactform/yanonekaffeesatz-regular-webfont.woff') format('woff'),
-	url('yanonekaffeesatz-regular-webfont.ttf') format('truetype'),
-	url('yanonekaffeesatz-regular-webfont.svg#YanoneKaffeesatzRegular') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
+﻿
 
-body { font-family: 'YanoneKaffeesatzRegular';}
-p {text-shadow:0 1px 0 #fff; font-size:24px;}
+
+p {text-shadow:0 1px 0 #fff; font-size:18px;}
 #wrap {width:550px; margin:20px auto 0; height:1000px;}
 h1 {margin-bottom:20px; text-align:center;font-size:48px; text-shadow:0 1px 0 #ede8d9; }
 
@@ -61,7 +52,7 @@ h1 {margin-bottom:20px; text-align:center;font-size:48px; text-shadow:0 1px 0 #e
 		}
 
 		input[type=text], textarea {
-			font: 14px normal normal uppercase helvetica, arial, serif;
+			font: 14px sans-serif;
 			color: #7c7873;background:none;
 			width: 355px; height: 45px;
 			border:1px solid #f8f5f1;
@@ -76,7 +67,7 @@ h1 {margin-bottom:20px; text-align:center;font-size:48px; text-shadow:0 1px 0 #e
 		textarea:focus, input[type=text]:focus {background:rgba(255,255,255,.35);}
 
 		#form_wrap input[type=submit] {
-			position:relative;font-family: 'YanoneKaffeesatzRegular'; 
+			position:relative; 
 			font-size:24px; color: white;text-shadow:0 1px 0 #fff;
 			width:99%; text-align:center;opacity:0;
 			background:green;
@@ -105,5 +96,5 @@ h1 {margin-bottom:20px; text-align:center;font-size:48px; text-shadow:0 1px 0 #e
 .border {
     border: 2px solid #00BFFF;
     border-radius: 5px;
-    font-size: 22px;
+    font-size: 20px;
 }

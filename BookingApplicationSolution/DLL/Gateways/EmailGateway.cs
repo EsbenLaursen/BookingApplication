@@ -27,5 +27,24 @@ namespace DLL.Gateways
                 return false;
             }
         }
+
+        public List<String> getAdmin()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:52218/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.GetAsync("api/email/GetAdmin").Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadAsAsync<List<string>>().Result;
+                }
+            }
+            return new List<string>();
+        }
     }
 }

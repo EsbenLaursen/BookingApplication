@@ -9,6 +9,7 @@ using DLL.Gateways;
 
 namespace BookingAppAdmin.Controllers
 {
+    [Authorize]
     public class RoomController : Controller
     {
         IServiceGateway<Room> rg = new DllFacade().GetRoomGateway();
