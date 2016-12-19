@@ -18,7 +18,7 @@ namespace DLL.Gateways
 
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                AddAuthorizationHeader(client);
                 HttpResponseMessage response = client.PostAsJsonAsync("api/rooms/PostRoom", t).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -35,7 +35,7 @@ namespace DLL.Gateways
                 client.BaseAddress = new Uri("http://localhost:52218/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                AddAuthorizationHeader(client);
                 var response = client.DeleteAsync("/api/rooms/DeleteRoom/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -89,7 +89,7 @@ namespace DLL.Gateways
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
-
+                AddAuthorizationHeader(client);
                 var response = client.PutAsJsonAsync("api/rooms/PutRoom/" + t.Id, t).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -97,6 +97,16 @@ namespace DLL.Gateways
                 }
             }
             return new Room();
+        }
+
+        private void AddAuthorizationHeader(HttpClient client)
+        {
+            if (HttpContext.Current.Session["token"] != null)
+            {
+                string token = HttpContext.Current.Session["token"].ToString();
+                client.DefaultRequestHeaders.Remove("Authorization");
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            }
         }
     }
 }

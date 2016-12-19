@@ -11,7 +11,6 @@ using DLL;
 
 namespace BookingAppAdmin.Controllers
 {
-    [Authorize]
     public class BookingController : Controller
     {
         IServiceGateway<Booking> bg = new DllFacade().GetBookingGateway();

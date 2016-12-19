@@ -31,6 +31,10 @@ namespace BookingAppAdmin.Controllers
         public ActionResult Upload()
         {
             var List = cg.GetAcc();
+            if (List == null || List.Count == 0)
+            {
+                return RedirectToAction("Index");
+            }
             Account acc = new Account()
             {
                 Cloud = List[0],

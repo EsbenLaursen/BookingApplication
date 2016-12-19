@@ -16,17 +16,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Main", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Admin overview", "Index", "Main", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Main", "Index", "Main")</li>
                     <li>@Html.ActionLink("Footcare", "Index", "FootCare")</li>
                     <li>@Html.ActionLink("Pending Booking", "Index", "TempBooking")</li>
                     <li>@Html.ActionLink("Room", "Index", "Room")</li>
                     <li>@Html.ActionLink("Image", "Index", "Image")</li>
                     <li>@Html.ActionLink("Booking", "Index", "Booking")</li>
-                    <li>@Html.ActionLink("Log out", "LogOut", "Main")</li>
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                       
+                        <li>@Html.ActionLink("Log out", "LogOut", "Main")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Log in", "LogOn", "Main")</li>
+                    }
                 </ul>   
             </div>
         </div>

@@ -35,15 +35,18 @@
                     <li>@Html.ActionLink("About", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Reviews", "Review", "Home")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
+        
         <hr />
         <footer>
+            
             <p style="font-size: 12px">&copy; @DateTime.Now.Year - EEPA IT</p>
+            <div> @Html.ActionLink("Admin login", "GoToAdminView", "Home") </div> 
         </footer>
     </div>
 

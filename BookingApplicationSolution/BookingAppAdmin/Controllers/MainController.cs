@@ -3,6 +3,8 @@ using DLL.Gateways;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -32,16 +34,30 @@ namespace BookingAppAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOn(string username, string password, string ReturnUrl)
         {
-            var user = gateway.getAdmin();
-            if (user[0] == username && user[1] == password)
+
+            HttpResponseMessage response = gateway.Login(username, password);
+
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                FormsAuthentication.SetAuthCookie(user[0], false);
+                FormsAuthentication.SetAuthCookie(username, false);
                 return RedirectToAction("../" + ReturnUrl);
             }
             else
             {
                 return RedirectToAction("LogOn");
             }
+
+
+            //var user = gateway.getAdmin();
+            //if (user[0] == username && user[1] == password)
+            //{
+            //    FormsAuthentication.SetAuthCookie(user[0], false);
+            //    return RedirectToAction("../" + ReturnUrl);
+            //}
+            //else
+            //{
+            //    return RedirectToAction("LogOn");
+            //}
         }
         public ActionResult LogOut()
         {

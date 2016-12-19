@@ -64,24 +64,28 @@
         var month = currentTime.getMonth() + 1;
         var day = currentTime.getDate();
         var year = currentTime.getFullYear();
-        var date = year + "/" + month + "/" + day;
+        var date = year + "-" + month + "-" + day;
         return date;
     };
 
     $(document).ready(function () {
-
-           var dateArray = [];
+           
             var data = @Html.Raw(Json.Encode(Model.UnavailableDates));
-
+                var dateArray = [];
                 for(var key in data)
                 {
                     if (data.hasOwnProperty(key)) {
+                        //WHY DOESNT IT WORK
+                        //var thedate = convertDate(data[key]);
+                        //dateArray.push(thedate);
+
+                        //This works
                         var thedate = convertDate(data[key]);
                         var newDate = new Date(thedate);
-                        dateArray.push($.datepicker.formatDate('yy-mm-dd', newDate));
+                        var anotherDate = $.datepicker.formatDate('yy-mm-dd', newDate);
+                        dateArray.push(anotherDate);
                     }
                 }
-
             $("#datepickerInput").datepicker({
                 dateFormat: "dd-mm-yy",
                 monthNames: ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December"],
@@ -89,7 +93,7 @@
                 showWeek: "W",
                 weekHeader: "#",
                 minDate: 0,
-                beforeShowDay: lollern
+                beforeShowDay: checkDate
             });
 
             $("#datepickerInput2").datepicker({
@@ -99,13 +103,13 @@
                 showWeek: "W",
                 weekHeader: "#",
                 minDate: 0,
-                beforeShowDay: lollern
+                beforeShowDay: checkDate
             });
 
            
 
-            function lollern (date) {
-                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+            function checkDate (date) {
+                var string = $.datepicker.formatDate('yy-mm-dd', date);
                 return [dateArray.indexOf(string) == -1]
             }
 

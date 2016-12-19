@@ -8,6 +8,7 @@ using System.Web;
 
 namespace DLL.Gateways
 {
+   
     public class CustomerGateway : IServiceGateway<Customer>
     {
         public Customer Create(Customer t)
@@ -17,6 +18,8 @@ namespace DLL.Gateways
                 client.BaseAddress = new Uri("http://localhost:52218/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                AddAuthorizationHeader(client);
 
                 HttpResponseMessage response = client.PostAsJsonAsync("api/Customers/PostCustomer", t).Result;
                 if (response.IsSuccessStatusCode)
@@ -34,6 +37,8 @@ namespace DLL.Gateways
                 client.BaseAddress = new Uri("http://localhost:52218/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                AddAuthorizationHeader(client);
 
                 var response = client.DeleteAsync("/api/Customers/DeleteCustomer/" + id).Result;
                 if (response.IsSuccessStatusCode)
@@ -90,6 +95,8 @@ namespace DLL.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
+                AddAuthorizationHeader(client);
+
                 var response = client.PutAsJsonAsync("api/Customers/PutCustomer/" + t.Id, t).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -97,6 +104,16 @@ namespace DLL.Gateways
                 }
             }
             return new Customer();
+        }
+
+        private void AddAuthorizationHeader(HttpClient client)
+        {
+            if (HttpContext.Current.Session["token"] != null)
+            {
+                string token = HttpContext.Current.Session["token"].ToString();
+                client.DefaultRequestHeaders.Remove("Authorization");
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            }
         }
     }
 }

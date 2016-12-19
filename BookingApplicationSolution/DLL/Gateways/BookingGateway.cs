@@ -7,19 +7,22 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace DLL.Gateways
 {
     public class BookingGateway : IServiceGateway<Booking>
     {
+       
         public Booking Create(Booking t)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:52218/");
-
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                AddAuthorizationHeader(client);
 
                 HttpResponseMessage response = client.PostAsJsonAsync("api/bookings/PostBooking", t).Result;
                 if (response.IsSuccessStatusCode)
@@ -37,6 +40,8 @@ namespace DLL.Gateways
                 client.BaseAddress = new Uri("http://localhost:52218/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                AddAuthorizationHeader(client);
 
                 var response = client.DeleteAsync("/api/bookings/DeleteBooking/" + id).Result;
                 if (response.IsSuccessStatusCode)
@@ -56,6 +61,7 @@ namespace DLL.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
+                
                 HttpResponseMessage response = client.GetAsync("api/bookings/GetBookings").Result;
                 if (response.IsSuccessStatusCode)
                 { 
@@ -92,6 +98,7 @@ namespace DLL.Gateways
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
+                AddAuthorizationHeader(client);
 
                 var response = client.PutAsJsonAsync("api/bookings/PutBooking/" + t.Id, t).Result;
                 if (response.IsSuccessStatusCode)
@@ -100,6 +107,16 @@ namespace DLL.Gateways
                 }
             }
             return new Booking();
+        }
+
+        private void AddAuthorizationHeader(HttpClient client)
+        {
+            if (HttpContext.Current.Session["token"] != null)
+            {
+                string token = HttpContext.Current.Session["token"].ToString();
+                client.DefaultRequestHeaders.Remove("Authorization");
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            }
         }
     }
 }

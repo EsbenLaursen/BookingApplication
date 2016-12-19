@@ -2,6 +2,16 @@
 @{
     ViewBag.Title = "Index";
 }
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
 
-<h2>Index</h2>
+    <h2>You are currently logged in. Welcome to the admin view.</h2>
+    <p>It's possible to see a list of footcares, pending bookings, rooms, images and booking</p>
+    <p>It's also possible to edit and delete the different entities</p>
+}
+else
+{
+    <h2>Welcome to the admin view. Please login</h2>
+}
+
 

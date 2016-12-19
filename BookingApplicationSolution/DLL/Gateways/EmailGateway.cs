@@ -6,10 +6,11 @@ using System.Net.Http.Headers;
 using System.Web;
 using Newtonsoft.Json;
 using DLL.Models;
+using Newtonsoft.Json.Linq;
 
 namespace DLL.Gateways
 {
-    public class EmailGateway 
+    public class EmailGateway
     {
         public bool SendMail(EmailFormModel efm)
         {
@@ -28,23 +29,38 @@ namespace DLL.Gateways
             }
         }
 
-        public List<String> getAdmin()
+        public HttpResponseMessage Login(string username, string password)
         {
+            //setup login data
+            var formContent = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("grant_type", "password"),
+                new KeyValuePair<string, string>("username", username),
+                new KeyValuePair<string, string>("password", password)
+            });
+
+            //Request token
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:52218/");
                 client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(
-                    new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = client.GetAsync("api/email/GetAdmin").Result;
+                HttpResponseMessage response = client.PostAsync("token", formContent).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return response.Content.ReadAsAsync<List<string>>().Result;
+                    var responseJson = response.Content.ReadAsStringAsync().Result;
+                    var jObject = JObject.Parse(responseJson);
+                    string token = jObject.GetValue("access_token").ToString();
+                    HttpContext.Current.Session["token"] = token;
                 }
+
+                return response;
             }
-            return new List<string>();
+
+           
         }
+       
     }
 }

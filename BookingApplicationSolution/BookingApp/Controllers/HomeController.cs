@@ -74,9 +74,7 @@ namespace BookingApp.Controllers
 
         [HttpPost]
         public ActionResult SendEmail(string email, string name, string message)
-        {
-            
-           
+        { 
             if (email != null || name != null || message != null)
             { EmailFormModel efm = new EmailFormModel();
                 efm.FromName = name;
@@ -108,6 +106,11 @@ namespace BookingApp.Controllers
 
             }
             return RedirectToAction("Review");
+        }
+
+        public ActionResult GoToAdminView()
+        {
+            return Redirect("http://localhost:6263");
         }
     }
 }
