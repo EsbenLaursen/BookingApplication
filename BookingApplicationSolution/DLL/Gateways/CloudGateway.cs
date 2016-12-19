@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using CloudinaryDotNet;
 using DLL.Entities;
 using NUnit.Framework;
+using System.Web;
 
 namespace DLL.Gateways
 {
@@ -22,6 +23,8 @@ namespace DLL.Gateways
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
+                AddAuthorizationHeader(client);
+
                 HttpResponseMessage response = client.GetAsync("api/Cloud/GetAcc").Result;
 
                 if (response.IsSuccessStatusCode)
@@ -31,6 +34,16 @@ namespace DLL.Gateways
                 }
             }
             return new List<string>();
+        }
+
+        private void AddAuthorizationHeader(HttpClient client)
+        {
+            if (HttpContext.Current.Session["token"] != null)
+            {
+                string token = HttpContext.Current.Session["token"].ToString();
+                client.DefaultRequestHeaders.Remove("Authorization");
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            }
         }
     }
 }

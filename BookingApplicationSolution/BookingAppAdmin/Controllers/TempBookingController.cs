@@ -37,6 +37,7 @@ namespace BookingAppAdmin.Controllers
             return View(tembbook);
         }
 
+
         // POST: TempBooking/Create
         [HttpPost]
         public ActionResult Accept(int id)
