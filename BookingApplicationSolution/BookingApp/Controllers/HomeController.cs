@@ -106,5 +106,10 @@ namespace BookingApp.Controllers
             }
             return RedirectToAction("Review");
         }
+
+        public ActionResult GoToAdminView()
+        {
+           return Redirect("http://localhost:6263/");
+        }
     }
 }
