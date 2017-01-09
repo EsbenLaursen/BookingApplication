@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "SendEmail";
+}
+
+<head>
+    <link href="~/Content/StylesheetIndexBooking.css" rel="stylesheet" />
+</head>
+
+<div class="progress">
+    <div class="circle done">
+        <span class="label">1</span>
+        <span class="title">Dates</span>
+    </div>
+    <span class="bar done"></span>
+    <div class="circle done">
+        <span class="label">2</span>
+        <span class="title">Rooms</span>
+    </div>
+    <span class="bar done"></span>
+    <div class="circle done">
+        <span class="label">3</span>
+        <span class="title">Info</span>
+    </div>
+    <span class="bar done"></span>
+    <div class="circle done">
+        <span class="label">4</span>
+        <span class="title">Confirm</span>
+    </div>
+</div>
+<h2>Booking success</h2>
+<br/>
+<p> Your Booking request has been sent and is awaiting confirmation. You will receive an email when the booking is confirmed.</p>
+<br/>
+<p> Press Ok to return to Home</p>
+<br/>
+@using (Html.BeginForm("Index", "Home"))
+{
+<input type="submit" class="btn btn-success" value="OK"/>
+}
+

@@ -297,6 +297,7 @@
     <Content Include="Views\Booking\RoomsAvailable.cshtml" />
     <Content Include="Views\Booking\Search.cshtml" />
     <Content Include="Views\Home\SendEmail.cshtml" />
+    <Content Include="Views\Booking\SendEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
